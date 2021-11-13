@@ -1,45 +1,36 @@
 import React from 'react'
-import pic02 from '../assets/images/pic02.jpg'
+import pano from '../assets/images/pano.jpg'
 import { Link as ScrollLink } from 'react-scroll'
 import Fade from 'react-reveal/Fade'
 
 const One = props => (
   <section
     id="one"
-    className="spotlight style1 bottom inactive"
-    style={{ backgroundImage: `url(${pic02})` }}
+    className="style1 bottom inactive"
   >
-    <span className="image fit main">
-      <img src={pic02} alt="" />
-    </span>
     <Fade bottom big>
       <div className="content">
         <div className="container">
           <div className="row">
             <div className="col-4 col-12-medium">
               <header>
-                <h2>Odio faucibus ipsum integer consequat</h2>
+                <h2>What?</h2>
                 <p>
-                  Nascetur eu nibh vestibulum amet gravida nascetur praesent
+                 Multi-week drop in and out hack camp in the heart of a world heritage site.
                 </p>
               </header>
             </div>
             <div className="col-4 col-12-medium">
               <p>
-                Feugiat accumsan lorem eu ac lorem amet sed accumsan donec.
-                Blandit orci porttitor semper. Arcu phasellus tortor enim mi
-                nisi praesent dolor adipiscing. Integer mi sed nascetur cep
-                aliquet augue varius tempus lobortis porttitor accumsan
-                consequat adipiscing lorem dolor.
+                The unique landscape of the Lake District has a history of inspiring great minds: William Wordsworth, John Ruskin, Arthur Ransome, Beatrix Potter J. M. W. Turner and dozens more.
+                 </p><p>
+                Scratch the surface of any part of this area and you find the birthplace of ideas that shaped our world.
               </p>
             </div>
             <div className="col-4 col-12-medium">
               <p>
-                Morbi enim nascetur et placerat lorem sed iaculis neque ante
-                adipiscing adipiscing metus massa. Blandit orci porttitor
-                semper. Arcu phasellus tortor enim mi mi nisi praesent
-                adipiscing. Integer mi sed nascetur cep aliquet augue varius
-                tempus. Feugiat lorem ipsum dolor nullam.
+                The event will give space and provide inspiration to explore technology that solves today's problems. We aim to put a mixture of technologists and problem owners in an area
+                 in the heart of the Lake District for a few weeks over summer, spend time together to generate meaningful and sustainable prototype technology solutions.
               </p>
             </div>
           </div>

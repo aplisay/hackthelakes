@@ -41,6 +41,7 @@ const Layout = ({ children, ...props }) => (
             <Footer />
           </div>
         </div>
+        
       </React.Fragment>
     )}
   />

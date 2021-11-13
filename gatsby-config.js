@@ -15,15 +15,15 @@ module.exports = {
         items: [
           {
             name: 'Left Sidebar',
-            link: '/left-sidebar',
+            link: '/',
           },
           {
             name: 'Right Sidebar',
-            link: '/right-sidebar',
+            link: '/',
           },
           {
             name: 'No Sidebar',
-            link: '/no-sidebar',
+            link: '/',
           },
           {
             name: 'SubMenu',
@@ -51,7 +51,7 @@ module.exports = {
       },
       {
         name: 'Elements',
-        link: '/elements',
+        link: '/',
       },
       {
         name: 'Sign Up',
