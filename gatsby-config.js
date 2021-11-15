@@ -84,9 +84,17 @@ module.exports = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        path: `${__dirname}/content/pages`,
-        name: `pages`,
+        path: `${__dirname}/content/pages`
       }
+    },
+    `gatsby-remark-images`,
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        gatsbyRemarkPlugins: [
+          `gatsby-remark-images`
+        ]
+      },
     },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',

@@ -1,5 +1,5 @@
 import React from 'react'
-import wifi from '../assets/images/wifi.jpg'
+import wifi from '../assets/images/pic01.jpg'
 import { Link as ScrollLink } from 'react-scroll'
 import Fade from 'react-reveal/Fade'
 

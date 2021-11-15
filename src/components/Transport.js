@@ -1,5 +1,5 @@
 import React from 'react'
-import oxenholme from '../assets/images/oxenholme.jpg'
+import oxenholme from '../assets/images/pic01.jpg'
 import { Link as ScrollLink } from 'react-scroll'
 import Fade from 'react-reveal/Fade'
 

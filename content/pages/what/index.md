@@ -9,4 +9,6 @@ The unique landscape of the Lake District has a history of inspiring great minds
 
 Scratch the surface of any part of this area and you find the birthplace of ideas that shaped our world.
 
+-------
+
 The event will give space and provide inspiration to explore technology that solves today's problems. We aim to put a mixture of technologists and problem owners in an area in the heart of the Lake District for a few weeks over summer, spend time together to generate meaningful and sustainable prototype technology solutions.

@@ -1,5 +1,5 @@
 import React from 'react'
-import pano from '../assets/images/pano.jpg'
+import pano from '../assets/images/pic01.jpg'
 import { Link as ScrollLink } from 'react-scroll'
 import Fade from 'react-reveal/Fade'
 
