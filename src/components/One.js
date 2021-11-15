@@ -1,9 +1,8 @@
 import React from 'react'
-import pano from '../assets/images/pano.jpg'
 import { Link as ScrollLink } from 'react-scroll'
 import Fade from 'react-reveal/Fade'
 
-const One = props => (
+const One = ({ data }) => (
   <section
     id="one"
     className="style1 bottom inactive"
