@@ -3,6 +3,7 @@ order: 3
 title: Facilities
 teaser: Our aim is to provide rich facilities whilst making the event as accessible as possible to anyone who wants to contribute
 featuredImage: ./wifi.jpg
+featuredImageAlt: Barn wall with Wifi unit on it
 style: 3
 ---
 

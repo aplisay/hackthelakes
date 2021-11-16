@@ -5,7 +5,7 @@ teaser: Multi-week drop in and out hack camp in the heart of a world heritage si
 style: 1
 ---
 
-The unique landscape of the Lake District has a history of inspiring great minds: William Wordsworth, John Ruskin, Arthur Ransome, Beatrix Potter J. M. W. Turner and dozens more.
+The Lake District has a history of inspiring great thoughts: William Wordsworth, John Ruskin, Arthur Ransome, Beatrix Potter J. M. W. Turner and dozens more were inspired by its unique landscape.
 
 Scratch the surface of any part of this area and you find the birthplace of ideas that shaped our world.
 

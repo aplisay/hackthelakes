@@ -88,14 +88,6 @@ module.exports = {
       }
     },
     `gatsby-remark-images`,
-    {
-      resolve: `gatsby-plugin-mdx`,
-      options: {
-        gatsbyRemarkPlugins: [
-          `gatsby-remark-images`
-        ]
-      },
-    },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     'gatsby-plugin-sass',
@@ -107,10 +99,17 @@ module.exports = {
     },
     'gatsby-plugin-offline',
     {
-      resolve: `gatsby-plugin-mdx`,
+      resolve: `gatsby-transformer-remark`,
       options: {
-        extensions: [".mdx", ".md"]
-      }
-    }
+        // Footnotes mode (default: true)
+        footnotes: false,
+        // GitHub Flavored Markdown mode (default: true)
+        gfm: true,
+        // Plugins configs
+        plugins: [
+          `gatsby-remark-images`
+        ],
+      },
+    },
   ],
-}
+};

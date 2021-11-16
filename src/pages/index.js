@@ -25,10 +25,7 @@ class Home extends React.Component {
           ]}
         ></Helmet>
         <Banner />
-        <Pages nodes={this.props.data.allMdx.nodes} />
-        <Balance />
-        <Facilities />
-        <Transport />
+        <Pages nodes={this.props.data.allMarkdownRemark.nodes} />
         <Four />
         <Five />
 
@@ -40,26 +37,26 @@ class Home extends React.Component {
 
 export const query = graphql`
   query {
-    allMdx {
-      nodes {
-        frontmatter {
-          title
-          teaser
-          order
-          style
-          featuredImage {
-            childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid
-              }
-            }
+  allMarkdownRemark(sort: {fields: frontmatter___order, order: ASC}) {
+    nodes {
+      frontmatter {
+        title
+        teaser
+        order
+        style
+        featuredImage {
+          childImageSharp {
+            gatsbyImageData
           }
         }
-        id
-        body
       }
+      id
+      html
+      excerpt(pruneLength: 500)
     }
   }
+}
+
 `;
 
 export default Home;

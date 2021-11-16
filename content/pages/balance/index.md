@@ -1,7 +1,7 @@
 ---
 order: 2
 title: Balance
-teaser: Inspired comes first, software development second
+teaser: Inspiration comes first, development second
 featuredImage: ./pano.jpg
 featuredImageAlt: Panorama from the top of Black Fell, walking distance from HacktheLakes HQ
 style: 2
