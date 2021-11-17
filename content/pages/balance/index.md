@@ -1,6 +1,8 @@
 ---
 order: 2
 title: Balance
+slug: /facilities
+menu: 1
 teaser: Inspiration comes first, development second
 featuredImage: ./pano.jpg
 featuredImageAlt: Panorama from the top of Black Fell, walking distance from HacktheLakes HQ

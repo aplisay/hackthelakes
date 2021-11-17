@@ -110,11 +110,11 @@ class Header extends React.Component {
           </div>
         </div>
 
-        <header id="header">
+        <header id="header" style={{ backgroundColor: 'rgba(0,0,0,0.4)'}}>
           <h1 id="logo">
             <Link to="/">{siteTitle}</Link>
           </h1>
-          <div className="navbar-menu">
+          <div className="navbar-menu reversed">
             <nav>
               <ul style={{ display: 'flex', flex: 1 }}>
                 {menuLinks.map(link =>

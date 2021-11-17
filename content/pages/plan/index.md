@@ -1,6 +1,8 @@
 ---
 order: 5
-title: What next
+title: Progress
+slug: /progress
+menu: 1
 teaser: Lots to do, little time to do it in
 featuredImage: ./lake.jpg
 style: 3

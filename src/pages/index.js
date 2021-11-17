@@ -16,17 +16,8 @@ class Home extends React.Component {
     console.log({ props: this.props });
     return (
       <Layout location="/">
-        <Helmet
-          htmlAttributes={{ lang: 'en' }}
-          title="Gatsby Starter - Landed"
-          meta={[
-            { name: 'description', content: 'Landed Gatsby Starter' },
-            { name: 'keywords', content: 'sample, something' },
-          ]}
-        ></Helmet>
         <Banner />
         <Pages nodes={this.props.data.allMarkdownRemark.nodes} />
-        <Four />
         <Five />
 
       </Layout>
@@ -52,7 +43,7 @@ export const query = graphql`
       }
       id
       html
-      excerpt(pruneLength: 500)
+      excerpt(pruneLength: 500, format: HTML)
     }
   }
 }
