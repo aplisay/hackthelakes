@@ -15,7 +15,7 @@ class Home extends React.Component {
   render() {
     console.log({ props: this.props });
     return (
-      <Layout location="/">
+      <Layout location="/" nodes={this.props.data.allMarkdownRemark.nodes}>
         <Banner />
         <Pages nodes={this.props.data.allMarkdownRemark.nodes} />
         <Five />
@@ -35,6 +35,8 @@ export const query = graphql`
         teaser
         order
         style
+        slug
+        menu
         featuredImage {
           childImageSharp {
             gatsbyImageData
@@ -44,6 +46,7 @@ export const query = graphql`
       id
       html
       excerpt(pruneLength: 500, format: HTML)
+      fileAbsolutePath
     }
   }
 }

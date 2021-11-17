@@ -1,10 +1,10 @@
 ---
 order: 5
 title: Progress
-slug: /progress
 menu: 1
 teaser: Lots to do, little time to do it in
-featuredImage: ./lake.jpg
+featuredImageAlt: Lake
+featuredImage: ./lakee.jpg
 style: 3
 ---
 

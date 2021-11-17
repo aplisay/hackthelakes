@@ -4,6 +4,7 @@ title: Location and Transport
 teaser: Our location in the heart of the beautiful Lake District is highly accessible for responsible transport
 featuredImage: ./oxenholme.jpg
 style: 2
+menu: 1
 ---
 
 Sustainability is a key theme for this project. The location is directly on one of the few local bus routes, and participants are encouraged to use public transport to arrive at HTL and get around the Lake District once here.

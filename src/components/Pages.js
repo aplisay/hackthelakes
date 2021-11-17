@@ -56,7 +56,7 @@ const Style1 = ({ node, style, title, teaser, direction,  }) => (
   </section>
 );
 
-const StyleN = ({ node, style, direction, title, teaser, img, featuredImageAlt }) => (
+const StyleN = ({ node, style, direction, title, teaser, img, featuredImageAlt, slug }) => (
   <section
     key={node.id}
     className={`spotlight style${style} ${direction} inactive`}
@@ -76,7 +76,7 @@ const StyleN = ({ node, style, direction, title, teaser, img, featuredImageAlt }
         <div>{ReactHtmlParser(node.excerpt)}</div>
         <ul className="actions">
           <li>
-            <a href="/" className="button">
+            <a href={slug} className="button" alt="featuredImageAlt">
               Learn More
             </a>
           </li>
@@ -101,14 +101,15 @@ const StyleN = ({ node, style, direction, title, teaser, img, featuredImageAlt }
 
 const Pages = ({ nodes }) =>
   nodes.map(node => {
-    let { style, title, teaser, featuredImage, featuredImageAlt } = node.frontmatter;
+    let { style, title, teaser, featuredImage, featuredImageAlt, slug } = node.frontmatter;
     let direction = (style % 2) ? 'left' : 'right';
     let img = getImage(featuredImage);
+    slug = slug || node.fileAbsolutePath.replace(/.*\/([0-9A-Za-z\-]+)\/[^\/]*$/, '/$1') || `/${node.id}`
     console.log({ style, title, teaser, featuredImage, featuredImageAlt, direction, img });
     if (style === 1)
-      return (<Style1 {...{ node, style, title, teaser, featuredImage, featuredImageAlt, direction, img }} />);
+      return (<Style1 {...{ node, style, title, teaser, featuredImage, featuredImageAlt, direction, img, slug }} />);
     else
-      return (<StyleN {...{ node, style, title, teaser, featuredImage, featuredImageAlt, direction, img }} />);
+      return (<StyleN {...{ node, style, title, teaser, featuredImage, featuredImageAlt, direction, img, slug }} />);
     
   });
 

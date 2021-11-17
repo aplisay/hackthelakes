@@ -1,12 +1,11 @@
 ---
 order: 2
 title: Balance
-slug: /facilities
-menu: 1
 teaser: Inspiration comes first, development second
 featuredImage: ./pano.jpg
 featuredImageAlt: Panorama from the top of Black Fell, walking distance from HacktheLakes HQ
 style: 2
+menu: 1
 ---
 
 Traditional tech hackathons are typically 2-3 days and based on focussed "macho" short cycle prototype development.

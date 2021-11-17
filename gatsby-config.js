@@ -4,61 +4,7 @@ module.exports = {
     title: 'Hack the lakes',
     author: 'rjp44',
     description: 'hackthelakes site',
-    menuLinks: [
-      {
-        name: 'Home',
-        link: '/',
-      },
-      {
-        name: 'Layouts',
-        link: '#',
-        items: [
-          {
-            name: 'Left Sidebar',
-            link: '/',
-          },
-          {
-            name: 'Right Sidebar',
-            link: '/',
-          },
-          {
-            name: 'No Sidebar',
-            link: '/',
-          },
-          {
-            name: 'SubMenu',
-            link: '#',
-            items: [
-              {
-                name: 'Option 1',
-                link: '#',
-              },
-              {
-                name: 'Option 2',
-                link: '#',
-              },
-              {
-                name: 'Option 3',
-                link: '#',
-              },
-              {
-                name: 'Option 4',
-                link: '#',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        name: 'Elements',
-        link: '/',
-      },
-      {
-        name: 'Sign Up',
-        link: '#',
-        cl: 'button primary',
-      },
-    ],
+   
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -87,7 +33,18 @@ module.exports = {
         path: `${__dirname}/content/pages`
       }
     },
-    `gatsby-remark-images`,
+    {
+      resolve: `gatsby-remark-images`,
+      options: {
+        // It's important to specify the maxWidth (in pixels) of
+        // the content container as this plugin uses this as the
+        // base for generating different widths of each image.
+        maxWidth: 3400,
+        // Remove the default behavior of adding a link to each
+        // image.
+        linkImagesToOriginal: false,
+      },
+    },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     'gatsby-plugin-sass',

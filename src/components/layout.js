@@ -1,8 +1,8 @@
-import React from 'react'
-import { StaticQuery, graphql } from 'gatsby'
-import '../assets/scss/main.scss'
-import Header from './Header'
-import Footer from './Footer'
+import React from 'react';
+import { StaticQuery, graphql } from 'gatsby';
+import '../assets/scss/main.scss';
+import Header from './Header';
+import Footer from './Footer';
 
 const Layout = ({ children, ...props }) => (
   <StaticQuery
@@ -12,39 +12,36 @@ const Layout = ({ children, ...props }) => (
           siteMetadata {
             title
             description
-            menuLinks {
-              name
-              link
-              cl
-              items {
-                link
-                name
-                items {
-                  link
-                  name
-                }
-              }
-            }
           }
         }
-      }
-    `}
+        allSitePage{
+           nodes {
+             path
+             component
+             pageContext
+          }
+       }
+     }
+     `}
     render={data => (
       <React.Fragment>
         <div className={props.location == '/' ? 'landing' : ''}>
           <div id="page-wrapper">
             <Header
-              menuLinks={data.site.siteMetadata.menuLinks}
+              menuLinks={data.allSitePage.nodes
+                .filter(node => node.pageContext.menu)
+                .sort((a, b) => (a.pageContext?.order || 0) - (b.pageContext?.order || 0))
+                .map(node => ({ name: (node.pageContext.title || node.path), link: node.path }))}
               siteTitle={data.site.siteMetadata.title}
             />
             {children}
             <Footer />
           </div>
         </div>
-        
+
       </React.Fragment>
     )}
   />
-)
+);
 
-export default Layout
+export default Layout;
