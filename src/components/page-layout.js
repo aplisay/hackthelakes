@@ -22,7 +22,7 @@ const Page = ({ data: { markdownRemark: {frontmatter, html} } }) => (
 
         <section id="content">
           {
-            frontmatter.featuredImage && (
+            false && (
               <a href="/" className="image fit">
                 <GatsbyImage
                   image={frontmatter.featuredImage.childImageSharp.gatsbyImageData}

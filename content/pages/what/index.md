@@ -1,14 +1,17 @@
 ---
 order: 1
 title: What?
-teaser: Multi-week drop in and out hack camp in the heart of a world heritage site.
+teaser: Multi-week drop in and out hack camp in the English Lake District
 style: 1
 ---
 
-The Lake District has a history of inspiring great thoughts: William Wordsworth, John Ruskin, Arthur Ransome, Beatrix Potter J. M. W. Turner and dozens more were inspired by its unique landscape.
+Remote hackathons and other ways that the tech industry has responded to the Covid pandemic have been great for keeping us all productive over this time.
 
-Scratch the surface of any part of this area and you find the birthplace of ideas that shaped our world.
+What we have however missed out on is place based community, and Hack the Lakes is a tentative plan to bring that back based in a tiny corner of the Lake District.
+
 
 -------
+
+Scratch the surface of any part of this area and you find the birthplace of ideas that shaped our world.
 
 The event will give space and provide inspiration to explore technology that solves today's problems. We aim to put a mixture of technologists and problem owners in an area in the heart of the Lake District for a few weeks over summer, spend time together to generate meaningful and sustainable prototype technology solutions.
