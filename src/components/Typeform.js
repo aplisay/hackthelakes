@@ -5,7 +5,7 @@ const TypeformButton = () => {
 
   return (
     <PopupButton id="UIJmH2E6" style={{ fontSize: 20 }} className="button primary">
-      Get involved
+      Get Involved
     </PopupButton>
   );
 

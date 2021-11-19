@@ -1,11 +1,8 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import Layout from '../components/layout';
-import { graphql } from 'gatsby'
-import { Link as ScrollLink } from 'react-scroll';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-
-import ReactHtmlParser from 'react-html-parser'; 
+import { graphql } from 'gatsby';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 const Page = ({ data: { markdownRemark: {frontmatter, html} } }) => (
   <Layout>
@@ -24,13 +21,16 @@ const Page = ({ data: { markdownRemark: {frontmatter, html} } }) => (
         </header>
 
         <section id="content">
-          <a href="#" className="image fit">
-            <GatsbyImage
-              image={frontmatter.featuredImage.childImageSharp.gatsbyImageData}
-              alt={frontmatter.featuredImageAlt}
-            />
-          </a>
-          {ReactHtmlParser(html)}
+          {
+            frontmatter.featuredImage && (
+              <a href="/" className="image fit">
+                <GatsbyImage
+                  image={frontmatter.featuredImage.childImageSharp.gatsbyImageData}
+                  alt={frontmatter.featuredImageAlt}
+                />
+              </a>
+            )}
+          <div dangerouslySetInnerHTML={{ __html: html }}/>
         </section>
       </div>
     </div>

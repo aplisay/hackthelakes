@@ -26,35 +26,22 @@ query {
   `);
   if (result.errors) {
     reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query');
+    return;
   }
   // Create blog post pages.
   result.data.allMarkdownRemark.nodes.forEach(({ fileAbsolutePath, id, frontmatter }, index) => {
     let slug = frontmatter.slug || fileAbsolutePath.replace(/.*\/([0-9A-Za-z\-]+)\/[^\/]*$/, '/$1') || `/${id}`
-    console.log({ slug, fileAbsolutePath, id, frontmatter})
     createPage({
       // You can prepend it with any prefix you want
       path: `${slug}`,
       // This component will wrap our MDX content
-      component: path.resolve(`./src/components/page-layout.js`),
+      component: path.resolve(`src/components/page-layout.js`),
       // You can use the values in this context in
       // our page layout component
       context: { id: id, menu: frontmatter.menu, title: frontmatter.title, order: index+10 },
     });
   });
+  return true;
 };
 
 
-exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
-  if (stage === 'build-html' || stage === "develop-html") {
-    actions.setWebpackConfig({
-      module: {
-        rules: [
-          {
-            test: /@typeform/,
-            use: loaders.null(),
-          },
-        ],
-      }
-    });
-  }
-}

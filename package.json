@@ -1,9 +1,10 @@
 {
-  "name": "gatsby-starter-landed-v2",
-  "description": "Gatsby Starter - Landed V2",
+  "name": "hackthelakes",
+  "description": "Hack the Lakes",
   "version": "1.0.0",
-  "author": "Vasilis Gakis",
+  "author": "Rob Pickering",
   "dependencies": {
+    "@loadable/component": "^5.15.0",
     "@typeform/embed-react": "^1.1.3",
     "gatsby": "^4.1.4",
     "gatsby-image": "^3.11.0",
@@ -22,7 +23,6 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
-    "react-html-parser": "^2.0.2",
     "react-reveal": "^1.2.2",
     "react-scroll": "^1.7.14"
   },

@@ -3,19 +3,16 @@ import { graphql } from 'gatsby';
 import { Link as ScrollLink } from 'react-scroll';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import Fade from 'react-reveal/Fade';
-import ReactHtmlParser from 'react-html-parser'; 
 
 const Columns = props => {
 
   let children = props.children;
-  console.log({ children });
 
   let sections = children.split('<hr>');
-  console.log('sections', { sections, children });
   return (
     <>
       {sections.map(section => (
-        <div className="col-4 col-12-medium">{ ReactHtmlParser(section) }</div>
+        <div className="col-4 col-12-medium" dangerouslySetInnerHTML={{ __html: section }} />
       ))}
     </>
   );
@@ -73,7 +70,7 @@ const StyleN = ({ node, style, direction, title, teaser, img, featuredImageAlt, 
           <h2>{title}</h2>
           <p>{teaser}</p>
         </header>
-        <div>{ReactHtmlParser(node.excerpt)}</div>
+        <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
         <ul className="actions">
           <li>
             <a href={slug} className="button" alt="featuredImageAlt">
@@ -105,7 +102,7 @@ const Pages = ({ nodes }) =>
     let direction = (style % 2) ? 'left' : 'right';
     let img = getImage(featuredImage);
     slug = slug || node.fileAbsolutePath.replace(/.*\/([0-9A-Za-z\-]+)\/[^\/]*$/, '/$1') || `/${node.id}`
-    console.log({ style, title, teaser, featuredImage, featuredImageAlt, direction, img });
+
     if (style === 1)
       return (<Style1 {...{ node, style, title, teaser, featuredImage, featuredImageAlt, direction, img, slug }} />);
     else

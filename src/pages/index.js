@@ -13,7 +13,7 @@ import Five from '../components/Five';
 
 class Home extends React.Component {
   render() {
-    console.log({ props: this.props });
+
     return (
       <Layout location="/" nodes={this.props.data.allMarkdownRemark.nodes}>
         <Banner />
