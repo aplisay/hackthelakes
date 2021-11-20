@@ -16,10 +16,9 @@ class Home extends React.Component {
 
     return (
       <Layout location="/" nodes={this.props.data.allMarkdownRemark.nodes}>
-        <Banner />
+        <Banner key="banner" />
         <Pages nodes={this.props.data.allMarkdownRemark.nodes} />
         <Five />
-
       </Layout>
     );
   }

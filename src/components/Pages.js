@@ -11,8 +11,8 @@ const Columns = props => {
   let sections = children.split('<hr>');
   return (
     <>
-      {sections.map(section => (
-        <div className="col-4 col-12-medium" dangerouslySetInnerHTML={{ __html: section }} />
+      {sections.map((section, index) => (
+        <div className="col-4 col-12-medium" dangerouslySetInnerHTML={{ __html: section }} key={`Column${index}`}/>
       ))}
     </>
   );
@@ -61,7 +61,7 @@ const StyleN = ({ node, style, direction, title, teaser, img, featuredImageAlt, 
     <span className="image fit main">
       <GatsbyImage
         image={img}
-        alt={featuredImageAlt}
+        alt={featuredImageAlt || title}
       />
     </span>
     <Fade right big>
@@ -96,18 +96,23 @@ const StyleN = ({ node, style, direction, title, teaser, img, featuredImageAlt, 
 
 
 
-const Pages = ({ nodes }) =>
-  nodes.map(node => {
-    let { style, title, teaser, featuredImage, featuredImageAlt, slug } = node.frontmatter;
-    let direction = (style % 2) ? 'left' : 'right';
-    let img = getImage(featuredImage);
-    slug = slug || node.fileAbsolutePath.replace(/.*\/([0-9A-Za-z\-]+)\/[^\/]*$/, '/$1') || `/${node.id}`
+const Pages = ({ nodes }) => (
+  <>
+  {
+    nodes.map(node => {
+      let { style, title, teaser, featuredImage, featuredImageAlt, slug } = node.frontmatter;
+      let direction = (style % 2) ? 'left' : 'right';
+      let img = getImage(featuredImage);
+      slug = slug || node.fileAbsolutePath.replace(/.*\/([0-9A-Za-z\-]+)\/[^\/]*$/, '/$1') || `/${node.id}`;
 
-    if (style === 1)
-      return (<Style1 {...{ node, style, title, teaser, featuredImage, featuredImageAlt, direction, img, slug }} />);
-    else
-      return (<StyleN {...{ node, style, title, teaser, featuredImage, featuredImageAlt, direction, img, slug }} />);
+      if (style === 1)
+        return (<Style1 key={node.id} {...{ node, style, title, teaser, featuredImage, featuredImageAlt, direction, img, slug }} />);
+      else
+        return (<StyleN key={node.id} {...{ node, style, title, teaser, featuredImage, featuredImageAlt, direction, img, slug }} />);
     
-  });
+    })
+    }
+    </>
+)
 
 export default Pages;

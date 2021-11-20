@@ -1,28 +1,67 @@
 import React from 'react'
 import { Link as ScrollLink } from 'react-scroll'
+import { graphql, useStaticQuery } from 'gatsby'
+import styled from 'styled-components'
 
-const Banner = props => (
-  <section id="banner">
-    <div className="content">
-      <header>
-        <h2>Hack the Lakes</h2>
-        <p>
-          ...
+import { getImage, GatsbyImage } from "gatsby-plugin-image"
+import { convertToBgImage } from "gbimage-bridge"
+import BackgroundImage from 'gatsby-background-image'
+
+const Banner = props => {
+
+  const data = useStaticQuery(
+    graphql`
+      query {
+        desktop: file(relativePath: { eq: "banner.jpg" }) {
+          childImageSharp {
+            gatsbyImageData(
+              width: 2000
+              placeholder: BLURRED
+              formats: [AUTO, WEBP, AVIF]
+            )
+          }
+        }
+      }
+    `
+  );
+  const imageData = getImage(data.desktop);
+  const bgImage = convertToBgImage(imageData)
+
+  console.log({ data, imageData, bgImage });
+
+  return (
+    <BackgroundImage
+      className=""
+        Tag="section"
+      id="banner"
+        alt="banner image"
+        {...bgImage}
+        preserveStackingContext
+    >
+      <div className="content">
+        <header>
+          <h2>Hack the Lakes</h2>
+          <p>
+            ...
         </p>
       </header>
-    </div>
-    <ScrollLink
-      to="one"
-      className="goto-next"
-      activeClass="active"
-      smooth={true}
-      offset={50}
-      duration={1500}
-      spy={true}
-    >
+      </div>
+
+            
+      <ScrollLink
+        to="one"
+        className="goto-next"
+        activeClass="active"
+        smooth={true}
+        offset={50}
+        duration={1500}
+        spy={true}
+      >
       Next
     </ScrollLink>
-  </section>
-)
+      </BackgroundImage >
+  );
+};
+
 
 export default Banner
