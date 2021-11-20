@@ -1574,14 +1574,14 @@
 		}
 
 		.content {
-      display: inline-block;
-      height: 100%;
-			margin-right: 1%;
-			max-width: 95%;
-			padding: $size-wrapper-pad-tb;
-			position: relative;
-			text-align: right;
-			vertical-align: middle;
+      display: block;
+      height: auto;
+      width: auto;
+      max-width: 95%;
+      max-height: 95%;
+      padding: $size-wrapper-pad-tb;
+      padding-top: 30%;
+      position: relative;
 			z-index: 1;
 
 			header {
