@@ -1,14 +1,8 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import { Helmet } from 'react-helmet';
 import Layout from '../components/layout';
 import Banner from '../components/Banner';
 import Pages from '../components/Pages';
-import One from '../components/One';
-import Transport from '../components/Transport';
-import Facilities from '../components/Facilities';
-import Balance from '../components/Balance';
-import Four from '../components/Four';
 import Five from '../components/Five';
 
 class Home extends React.Component {

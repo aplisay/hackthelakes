@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { graphql } from 'gatsby';
 import { Link as ScrollLink } from 'react-scroll';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import Fade from 'react-reveal/Fade';
@@ -103,7 +102,7 @@ const Pages = ({ nodes }) => (
       let { style, title, teaser, featuredImage, featuredImageAlt, slug } = node.frontmatter;
       let direction = (style % 2) ? 'left' : 'right';
       let img = getImage(featuredImage);
-      slug = slug || node.fileAbsolutePath.replace(/.*\/([0-9A-Za-z\-]+)\/[^\/]*$/, '/$1') || `/${node.id}`;
+      slug = slug || node.fileAbsolutePath.replace(/.*\/([0-9A-Za-z-]+)\/[^/]*$/, '/$1') || `/${node.id}`;
 
       if (style === 1)
         return (<Style1 key={node.id} {...{ node, style, title, teaser, featuredImage, featuredImageAlt, direction, img, slug }} />);

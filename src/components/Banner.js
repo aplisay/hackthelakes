@@ -1,9 +1,8 @@
 import React from 'react'
 import { Link as ScrollLink } from 'react-scroll'
 import { graphql, useStaticQuery } from 'gatsby'
-import styled from 'styled-components'
 
-import { getImage, GatsbyImage } from "gatsby-plugin-image"
+import { getImage } from "gatsby-plugin-image"
 import { convertToBgImage } from "gbimage-bridge"
 import BackgroundImage from 'gatsby-background-image'
 

@@ -56,6 +56,16 @@ module.exports = {
     },
     'gatsby-plugin-offline',
     {
+      resolve: `gatsby-plugin-gatsby-cloud`,
+      options: {
+        headers: {
+          "/.well-known/matrix/*": [
+            "Access-Control-Allow-Origin: *",
+          ],
+        },
+      },
+    },
+    {
       resolve: `gatsby-transformer-remark`,
       options: {
         // Footnotes mode (default: true)

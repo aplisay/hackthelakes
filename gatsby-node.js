@@ -30,7 +30,7 @@ query {
   }
   // Create blog post pages.
   result.data.allMarkdownRemark.nodes.forEach(({ fileAbsolutePath, id, frontmatter }, index) => {
-    let slug = frontmatter.slug || fileAbsolutePath.replace(/.*\/([0-9A-Za-z\-]+)\/[^\/]*$/, '/$1') || `/${id}`
+    let slug = frontmatter.slug || fileAbsolutePath.replace(/.*\/([0-9A-Za-z\-]+)\/[^\/]*$/, '/$1') || `/${id}`;
     createPage({
       // You can prepend it with any prefix you want
       path: `${slug}`,
@@ -38,7 +38,7 @@ query {
       component: path.resolve(`src/components/page-layout.js`),
       // You can use the values in this context in
       // our page layout component
-      context: { id: id, menu: frontmatter.menu, title: frontmatter.title, order: index+10 },
+      context: { id: id, menu: frontmatter.menu, title: frontmatter.title, order: index + 10 },
     });
   });
   return true;
