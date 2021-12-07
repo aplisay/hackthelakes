@@ -8,9 +8,11 @@ import Interact from '../components/Interact';
 class Home extends React.Component {
   render() {
 
+    let firstNode = this.props.data.allMarkdownRemark.nodes.filter(({ frontmatter: { order } }) => order >= 0).shift()
+
     return (
       <Layout location="/" nodes={this.props.data.allMarkdownRemark.nodes}>
-        <Banner key="banner" nextSection={this.props.data.allMarkdownRemark.nodes[0].id}/>
+        <Banner key="banner" nextSection={firstNode.id}/>
         <Pages nodes={this.props.data.allMarkdownRemark.nodes} />
         <Interact id="last-section"/>
       </Layout>
