@@ -26,7 +26,6 @@ const Banner = props => {
   const imageData = getImage(data.desktop);
   const bgImage = convertToBgImage(imageData)
 
-  console.log({ data, imageData, bgImage });
 
   return (
     <BackgroundImage
