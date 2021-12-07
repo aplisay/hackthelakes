@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link as ScrollLink } from 'react-scroll';
 import { Link } from 'gatsby'
 import MobileMenu from './MobileMenu'
 import Typeform from './Typeform.js';
@@ -234,7 +235,18 @@ class Header extends React.Component {
                   )
                 )}
                 <li key="getinvolved-button">
-                  <Typeform />
+                  <ScrollLink
+                    to="last-section"
+                    className="button primary"
+                    activeClass="active"
+                    smooth={true}
+                    offset={50}
+                    duration={1500}
+                    spy={true}
+                  >
+                    Get involved
+            </ScrollLink>
+
                 </li>
               </ul>
 
