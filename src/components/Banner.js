@@ -48,11 +48,11 @@ const Banner = props => {
 
             
       <ScrollLink
-        to="one"
+        to={props.nextSection}
         className="goto-next"
         activeClass="active"
         smooth={true}
-        offset={50}
+        offset={0}
         duration={1500}
         spy={true}
       >

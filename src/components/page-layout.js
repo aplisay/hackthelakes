@@ -1,6 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import Layout from '../components/layout';
+import Interact from '../components/interact';
 import { graphql } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 
@@ -34,6 +35,7 @@ const Page = ({ data: { markdownRemark: {frontmatter, html} } }) => (
         </section>
       </div>
     </div>
+    <Interact id="last-section"/>
   </Layout>
 );
 
