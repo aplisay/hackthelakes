@@ -36,13 +36,7 @@ const Style1 = ({ node, style, title, teaser, direction, slug }) => (
                   {teaser}
                 </p>
               </header>
-              <ul className="actions">
-                <li>
-                  <a href={slug} className="button" alt="featuredImageAlt">
-                    Learn More
-            </a>
-                </li>
-              </ul>
+
             </div>
             <Columns>{node.html}</Columns>
           </div>
@@ -107,32 +101,35 @@ const StyleN = ({ node, style, direction, title, teaser, img, featuredImageAlt, 
 );
 
 
-
-const Pages = ({ nodes }) => (
-  <>
-    {
-      nodes
-        .filter(node => node.frontmatter.order >= 0)
-        .map((node, index) => (
-          {
-            ...node,
-            nextSection: nodes[index+1] && nodes[index+1].id || 'last-section'
-          }
-        ))
+const processNodes = nodes => {
+  let displayNodes = nodes
+    .filter(node => node.frontmatter.order >= 0);
+  return displayNodes
+    .map((node, index) => (
+      {
+        ...node,
+        nextSection: (displayNodes[index + 1] && displayNodes[index + 1].id) || 'last-section'
+      }
+    ))
     .map((node) => {
       let { style, title, teaser, featuredImage, featuredImageAlt, slug } = node.frontmatter;
       let direction = (style % 2) ? 'left' : 'right';
       let img = getImage(featuredImage);
-      slug = slug || node.fileAbsolutePath.replace(/.*\/([0-9A-Za-z\-]+)\/[^\/]*$/, '/$1') || `/${node.id}`;
+      slug = slug || node.fileAbsolutePath.replace(/.*\/([0-9A-Za-z-]+)\/[^/]*$/, '/$1') || `/${node.id}`;
 
       if (style === 1)
         return (<Style1 key={node.id} {...{ node, style, title, teaser, featuredImage, featuredImageAlt, direction, img, slug }} />);
       else
         return (<StyleN key={node.id} {...{ node, style, title, teaser, featuredImage, featuredImageAlt, direction, img, slug }} />);
-    
-    })
-    }
-    </>
+
+    });
+};
+
+
+const Pages = ({ nodes }) => (
+  <>
+    {processNodes(nodes)}
+  </>
 )
 
 export default Pages;

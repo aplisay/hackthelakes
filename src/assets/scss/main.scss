@@ -1554,13 +1554,6 @@
 		text-align: center;
 		z-index: (_misc(max-spotlight) + 1);
 
-		&:before {
-			content: '';
-			display: inline-block;
-			height: 100vh;
-			vertical-align: middle;
-			width: 1%;
-		}
 
 		.content {
       display: block;
