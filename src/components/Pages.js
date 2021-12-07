@@ -19,8 +19,12 @@ const Columns = props => {
 };
 
 
-const Style1 = ({ node, style, title, teaser, direction,  }) => (
-  <section key={node.id} className={`style${style} bottom inactive`} >
+const Style1 = ({ node, style, title, teaser, direction, slug }) => (
+  <section id={node.id} key={node.id} className={`style${style} bottom inactive`} >
+    { console.log({ node })};
+    <span className="image fit main">
+  
+    </span>
     <Fade bottom big>
       <div className="content">
         <div className="container">
@@ -32,28 +36,37 @@ const Style1 = ({ node, style, title, teaser, direction,  }) => (
                   {teaser}
                 </p>
               </header>
+              <ul className="actions">
+                <li>
+                  <a href={slug} className="button" alt="featuredImageAlt">
+                    Learn More
+            </a>
+                </li>
+              </ul>
             </div>
             <Columns>{node.html}</Columns>
           </div>
         </div>
       </div>
+
     </Fade>
     <ScrollLink
-      to="two"
+      to={node.nextSection}
       className="goto-next"
       activeClass="active"
       smooth={true}
-      offset={50}
+      offset={0}
       duration={1500}
       spy={true}
     >
-      Next
+        Next
             </ScrollLink>
   </section>
 );
 
 const StyleN = ({ node, style, direction, title, teaser, img, featuredImageAlt, slug }) => (
   <section
+    id={node.id} 
     key={node.id}
     className={`spotlight style${style} ${direction} inactive`}
     style={{ backgroundImage: `url(${img.images.fallback.src})` }}>
@@ -80,11 +93,11 @@ const StyleN = ({ node, style, direction, title, teaser, img, featuredImageAlt, 
       </div>
     </Fade>
     <ScrollLink
-      to="three"
+      to={node.nextSection}
       className="goto-next"
       activeClass="active"
       smooth={true}
-      offset={50}
+      offset={0}
       duration={1500}
       spy={true}
     >
@@ -97,12 +110,20 @@ const StyleN = ({ node, style, direction, title, teaser, img, featuredImageAlt, 
 
 const Pages = ({ nodes }) => (
   <>
-  {
-    nodes.map(node => {
+    {
+      nodes
+        .filter(node => node.frontmatter.order >= 0)
+        .map((node, index) => (
+          {
+            ...node,
+            nextSection: nodes[index+1] && nodes[index+1].id || 'last-section'
+          }
+        ))
+    .map((node) => {
       let { style, title, teaser, featuredImage, featuredImageAlt, slug } = node.frontmatter;
       let direction = (style % 2) ? 'left' : 'right';
       let img = getImage(featuredImage);
-      slug = slug || node.fileAbsolutePath.replace(/.*\/([0-9A-Za-z-]+)\/[^/]*$/, '/$1') || `/${node.id}`;
+      slug = slug || node.fileAbsolutePath.replace(/.*\/([0-9A-Za-z\-]+)\/[^\/]*$/, '/$1') || `/${node.id}`;
 
       if (style === 1)
         return (<Style1 key={node.id} {...{ node, style, title, teaser, featuredImage, featuredImageAlt, direction, img, slug }} />);

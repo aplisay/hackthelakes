@@ -3,16 +3,16 @@ import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 import Banner from '../components/Banner';
 import Pages from '../components/Pages';
-import Five from '../components/Five';
+import Interact from '../components/Interact';
 
 class Home extends React.Component {
   render() {
 
     return (
       <Layout location="/" nodes={this.props.data.allMarkdownRemark.nodes}>
-        <Banner key="banner" />
+        <Banner key="banner" nextSection={this.props.data.allMarkdownRemark.nodes[0].id}/>
         <Pages nodes={this.props.data.allMarkdownRemark.nodes} />
-        <Five />
+        <Interact id="last-section"/>
       </Layout>
     );
   }

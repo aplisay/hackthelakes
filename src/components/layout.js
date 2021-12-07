@@ -33,6 +33,7 @@ const Layout = ({ children, ...props }) => (
                 .sort((a, b) => (a.pageContext?.order || 0) - (b.pageContext?.order || 0))
                 .map(node => ({ name: (node.pageContext.title || node.path), link: node.path }))}
               siteTitle={data.site.siteMetadata.title}
+              landing={props.location === '/'}
             />
             {children}
             <Footer />
