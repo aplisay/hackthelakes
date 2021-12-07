@@ -21,7 +21,7 @@ const Columns = props => {
 
 const Style1 = ({ node, style, title, teaser, direction, slug }) => (
   <section id={node.id} key={node.id} className={`style${style} bottom inactive`} >
-    { console.log({ node })};
+
     <span className="image fit main">
   
     </span>
