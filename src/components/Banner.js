@@ -40,7 +40,7 @@ const Banner = props => {
         <header>
           <h2>Hack the Lakes</h2>
           <p>
-            ...
+            Multi week, sustainable, rural hack camp.
         </p>
       </header>
       </div>

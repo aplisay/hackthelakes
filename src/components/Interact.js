@@ -16,7 +16,7 @@ const Interact = props => (
             </header>
             <ul className="actions fit">
               <li>
-                <a href="https://matrix.to/#/#general:hackthelakes.uk" target="_blank" className="button primary fit large">
+                <a href="https://matrix.to/#/#general:hackthelakes.uk" target="_blank" rel="noreferrer" className="button primary fit large">
                   #general:hackthelakes.uk
               </a>
               </li>
@@ -26,12 +26,12 @@ const Interact = props => (
           <div className="col-5 col-12-medium">
             <header>
               <h2>Register an Interest</h2>
-              <p>Fill in this Contact form if you would like us to contact you</p>
+              <p>Fill in this Contact form if you would like to contact us directly.</p>
             </header>
 
           <ul className="actions fit">
             <li>
-                <a href="https://forms.gle/VeBGCn2raRLpeAQW9" target="_blank" className="button secondary fit">
+                <a href="https://forms.gle/VeBGCn2raRLpeAQW9" target="_blank" rel="noreferrer" className="button secondary fit">
                 Contact Form
               </a>
             </li>

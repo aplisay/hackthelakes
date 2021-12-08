@@ -11,8 +11,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'gatsby-starter-default',
-        short_name: 'starter',
+        name: 'hackthelakes',
+        short_name: 'hackthelakes',
         start_url: '/',
         background_color: '#663399',
         theme_color: '#663399',
@@ -72,6 +72,7 @@ module.exports = {
         footnotes: false,
         // GitHub Flavored Markdown mode (default: true)
         gfm: true,
+        excerpt_separator: `<!-- end excerpt -->`,
         // Plugins configs
         plugins: [
           `gatsby-remark-images`
