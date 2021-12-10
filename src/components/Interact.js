@@ -1,6 +1,5 @@
 import React from 'react';
 import Fade from 'react-reveal/Fade';
-import Typeform from './Typeform.js';
 
 const Interact = props => (
   <section id={props.id || 'interact'} className="wrapper style2 special fade inactive">
@@ -11,13 +10,13 @@ const Interact = props => (
             <header>
               <h2>Get involved</h2>
               <p>
-                Join us in the Hack the Lakes Matrix room to help develop this idea.
+                Join us in the Hack the Lakes space on Matrix to discuss the plan.
               </p>
             </header>
             <ul className="actions fit">
               <li>
-                <a href="https://matrix.to/#/#general:hackthelakes.uk" target="_blank" rel="noreferrer" className="button primary fit large">
-                  #general:hackthelakes.uk
+                <a href="https://matrix.to/#/#hackthelakes:hackthelakes.uk" target="_blank" rel="noreferrer" className="button primary fit large">
+                  #hackthelakes:hackthelakes.uk
               </a>
               </li>
             </ul>
