@@ -26,6 +26,7 @@ const Style1 = ({ node, style, title, teaser, direction, slug }) => (
   
     </span>
     <Fade bottom big>
+      <div>
       <div className="content">
         <div className="container">
           <div className="row">
@@ -40,21 +41,22 @@ const Style1 = ({ node, style, title, teaser, direction, slug }) => (
             </div>
             <Columns>{node.html}</Columns>
           </div>
-        </div>
+          </div>
+          </div>
+        <ScrollLink
+          to={node.nextSection}
+          className="goto-next"
+          activeClass="active"
+          smooth={true}
+          offset={50}
+          duration={1500}
+          spy={true}
+        >
+          Next
+            </ScrollLink>
       </div>
 
     </Fade>
-    <ScrollLink
-      to={node.nextSection}
-      className="goto-next"
-      activeClass="active"
-      smooth={true}
-      offset={0}
-      duration={1500}
-      spy={true}
-    >
-        Next
-            </ScrollLink>
   </section>
 );
 
@@ -91,7 +93,7 @@ const StyleN = ({ node, style, direction, title, teaser, img, featuredImageAlt, 
       className="goto-next"
       activeClass="active"
       smooth={true}
-      offset={0}
+      offset={25}
       duration={1500}
       spy={true}
     >
