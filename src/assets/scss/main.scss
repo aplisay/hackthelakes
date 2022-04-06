@@ -155,7 +155,7 @@
 		text-decoration: none;
 
 		&:hover {
-			color: _palette(accent1) !important;
+      color: _palette(accent1) !important;
 			border-bottom-color: transparent;
 		}
 	}
@@ -1248,13 +1248,13 @@
 
 		&.style2 {
 			.content {
-				border-color: _palette(accent3);
+				border-color: _palette(border2-bg);
 			}
 		}
 
 		&.style3 {
 			.content {
-				border-color: _palette(accent4);
+				border-color: _palette(border2-bg);
 			}
 		}
 
@@ -1607,14 +1607,14 @@
 /* Footer */
 
 	#footer {
-		background: _palette(accent2);
+		background: _palette(bg);
 		padding: $size-wrapper-pad-tb 0;
 		text-align: center;
 
 		.icons {
 			.icon {
 				&.alt {
-					@include line-icon(_palette(accent2), _palette(fg-light));
+					@include line-icon(_palette(bg), _palette(fg-light));
 				}
 			}
 		}

@@ -6,6 +6,9 @@
 
 // You can delete this file if you're not using it
 const path = require("path");
+
+const DEBUG_webpack = false;
+
 exports.createPages = async ({ graphql, actions, reporter }) => {
   // Destructure the createPage function from the actions object
   const { createPage } = actions;
@@ -43,8 +46,6 @@ query {
   });
   return true;
 };
-
-
 // TODO: temporary workaround for https://github.com/gatsbyjs/gatsby/issues/31878
 exports.onCreateWebpackConfig = ({
   actions,
@@ -52,6 +53,9 @@ exports.onCreateWebpackConfig = ({
   stage,
   getConfig
 }) => {
+
+
+  DEBUG_webpack && console.info(`webpack: ${stage}: \n`, JSON.stringify(getConfig(), null, "  "));
   // override config only during production JS & CSS build
   if (stage === 'build-javascript') {
     // get current webpack config

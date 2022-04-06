@@ -4,7 +4,7 @@ module.exports = {
     title: 'Hack the lakes',
     author: 'rjp44',
     description: 'hackthelakes site',
-   
+
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -47,7 +47,14 @@ module.exports = {
     },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
-    'gatsby-plugin-sass',
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        sassOptions: {
+          includePaths: [`${__dirname}/src/scss`, `${__dirname}/src/scss/libs`],
+        }
+      }
+    },
     {
       resolve: 'gatsby-plugin-html-attributes',
       options: {
