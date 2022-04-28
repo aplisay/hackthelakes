@@ -1,47 +1,65 @@
-import React from 'react';
-import { StaticQuery, graphql } from 'gatsby';
-import '../assets/scss/main.scss';
-import Header from './Header';
-import Footer from './Footer';
+import React from "react";
+import { StaticQuery, graphql } from "gatsby";
+import "../assets/scss/main.scss";
+import Header from "./Header";
+import Footer from "./Footer";
+import { renderRichText } from "gatsby-source-contentful/rich-text";
 
 const Layout = ({ children, ...props }) => (
   <StaticQuery
     query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-            description
+      query SiteMenu {
+        allContentfulMainMenu {
+          nodes {
+            contactLinkName
+            references {
+              ... on ContentfulPage {
+                id
+                title
+                teaser
+                slug
+              }
+            }
           }
         }
-        allSitePage{
-           nodes {
-             path
-             component
-             pageContext
+        allContentfulSiteInformation {
+          nodes {
+            siteTitle
+            id
+            footerText {
+              raw
+            }
+             links
           }
-       }
-     }
-     `}
-    render={data => (
-      <React.Fragment>
-        <div className={props.location === '/' ? 'landing' : ''}>
-          <div id="page-wrapper">
-            <Header
-              menuLinks={data.allSitePage.nodes
-                .filter(node => node.pageContext.menu)
-                .sort((a, b) => (a.pageContext?.order || 0) - (b.pageContext?.order || 0))
-                .map(node => ({ name: (node.pageContext.title || node.path), link: node.path }))}
-              siteTitle={data.site.siteMetadata.title}
-              landing={props.location === '/'}
-            />
-            {children}
-            <Footer />
+        }
+      }
+    `}
+    render={(data) => {
+      let menu = data?.allContentfulMainMenu?.nodes[0]?.references?.map(
+        ({ title, slug }) => ({ name: title, link: slug.replace(/^\/*/, "/") })
+      );
+      let { siteTitle:title , footerText, ...social } = data?.allContentfulSiteInformation?.nodes[0];
+      let contactLink = data?.allContentfulMainMenu?.nodes[0]?.contactLinkName
+      console.log({ data, menu, title });
+      return (
+        <React.Fragment>
+          <div className={props.location === "/" ? "landing" : ""}>
+            <div id="page-wrapper">
+              <Header
+                menuLinks={menu}
+                contact={contactLink}
+                siteTitle={title}
+                landing={props.location === "/"}
+              />
+              {children}
+              <Footer {...social}>
+                {renderRichText(footerText)}
+              </Footer>  
+            </div>
           </div>
-        </div>
-
-      </React.Fragment>
-    )}
+        </React.Fragment>
+      );
+    }}
   />
 );
 

@@ -1,51 +1,61 @@
-import React from 'react';
-import { graphql } from 'gatsby';
-import Layout from '../components/layout';
-import Banner from '../components/Banner';
-import Pages from '../components/Pages';
-import Interact from '../components/Interact';
+import React from "react";
+import { graphql } from "gatsby";
+import Layout from "../components/layout";
+import Banner from "../components/Banner";
+import Pages from "../components/Pages";
+import Interact from "../components/Interact";
 
 class Home extends React.Component {
   render() {
+    console.log("PROPS", { props: this.props });
 
-    let firstNode = this.props.data.allMarkdownRemark.nodes.filter(({ frontmatter: { order } }) => order >= 0).shift()
+    let homepage = this.props.data.allContentfulHomepage.nodes[0];
 
     return (
-      <Layout location="/" nodes={this.props.data.allMarkdownRemark.nodes}>
-        <Banner key="banner" nextSection={firstNode.id}/>
-        <Pages nodes={this.props.data.allMarkdownRemark.nodes} />
-        <Interact id="last-section"/>
+      <Layout location="/">
+        <Banner key="banner" nextSection={homepage.id} {...homepage} />
+        <Pages nodes={[homepage, ...homepage.pages]} />
+        <Interact id="last-section" />
       </Layout>
     );
   }
-
 }
 
 export const query = graphql`
   query {
-  allMarkdownRemark(sort: {fields: frontmatter___order, order: ASC}) {
-    nodes {
-      frontmatter {
-        title
-        teaser
-        order
-        style
+    allContentfulHomepage {
+      nodes {
+        id
+        bannerImage {
+          id
+          gatsbyImageData(
+            width: 2000
+            placeholder: BLURRED
+            formats: [AUTO, WEBP, AVIF]
+          )
+        }
+        body {
+          raw
+        }
         slug
-        menu
-        featuredImage {
-          childImageSharp {
+        bodyTeaser
+        bodyTitle
+        title
+        titleDescription
+        pages {
+          id
+          title
+          teaser
+          featuredImage {
             gatsbyImageData
+          }
+          body {
+            raw
           }
         }
       }
-      id
-      html
-      excerpt(pruneLength: 500, format: HTML)
-      fileAbsolutePath
     }
   }
-}
-
 `;
 
 export default Home;

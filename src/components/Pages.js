@@ -1,17 +1,28 @@
 import * as React from 'react';
 import { Link as ScrollLink } from 'react-scroll';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { renderRichText } from "gatsby-source-contentful/rich-text";
 import Fade from 'react-reveal/Fade';
+import Excerpt from './Excerpt.js';
 
 const Columns = props => {
 
-  let children = props.children;
 
-  let sections = children.split('<hr>');
+
+  let { children } = props;
+
+  let sections = children.reduce((o, c) => {
+    if (c.type === 'hr')
+      o.push([]);
+    else
+      o[o.length - 1].push(c);
+    return o;
+  }, [[]]);
+
   return (
     <>
       {sections.map((section, index) => (
-        <div className="col-4 col-12-medium" dangerouslySetInnerHTML={{ __html: section }} key={`Column${index}`}/>
+        <div className="col-4 col-12-medium" key={`Column${index}`}>{section}</div>
       ))}
     </>
   );
@@ -23,26 +34,26 @@ const Style1 = ({ node, style, title, teaser, direction, slug }) => (
   <section id={node.id} key={node.id} className={`style${style} bottom inactive`} >
 
     <span className="image fit main">
-  
+
     </span>
     <Fade bottom big>
       <div>
-      <div className="content">
-        <div className="container">
-          <div className="row">
-            <div className="col-4 col-12-medium">
-              <header>
-                <h2>{title}</h2>
-                <p>
-                  {teaser}
-                </p>
-              </header>
+        <div className="content">
+          <div className="container">
+            <div className="row">
+              <div className="col-4 col-12-medium">
+                <header>
+                  <h2>{title}</h2>
+                  <p>
+                    {teaser}
+                  </p>
+                </header>
 
+              </div>
+              <Columns>{node.html}</Columns>
             </div>
-            <Columns>{node.html}</Columns>
           </div>
-          </div>
-          </div>
+        </div>
         <ScrollLink
           to={node.nextSection}
           className="goto-next"
@@ -53,7 +64,7 @@ const Style1 = ({ node, style, title, teaser, direction, slug }) => (
           spy={true}
         >
           Next
-            </ScrollLink>
+        </ScrollLink>
       </div>
 
     </Fade>
@@ -62,7 +73,7 @@ const Style1 = ({ node, style, title, teaser, direction, slug }) => (
 
 const StyleN = ({ node, style, direction, title, teaser, img, featuredImageAlt, slug }) => (
   <section
-    id={node.id} 
+    id={node.id}
     key={node.id}
     className={`spotlight style${style} ${direction} inactive`}
     style={{ backgroundImage: `url(${img.images.fallback.src})` }}>
@@ -78,7 +89,7 @@ const StyleN = ({ node, style, direction, title, teaser, img, featuredImageAlt, 
           <h2>{title}</h2>
           <p>{teaser}</p>
         </header>
-        <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+        <Excerpt>{node.html}</Excerpt>
         <ul className="actions">
           <li>
             <a href={slug} className="button" alt="featuredImageAlt">
@@ -104,8 +115,7 @@ const StyleN = ({ node, style, direction, title, teaser, img, featuredImageAlt, 
 
 
 const processNodes = nodes => {
-  let displayNodes = nodes
-    .filter(node => node.frontmatter.order >= 0);
+  let displayNodes = nodes;
   return displayNodes
     .map((node, index) => (
       {
@@ -113,14 +123,15 @@ const processNodes = nodes => {
         nextSection: (displayNodes[index + 1] && displayNodes[index + 1].id) || 'last-section'
       }
     ))
-    .map((node) => {
-      let { style, title, teaser, featuredImage, featuredImageAlt, slug } = node.frontmatter;
+    .map((node, index) => {
+      let { title, teaser, featuredImage, featuredImageAlt, slug, bodyTitle, bodyTeaser } = node;
+      let style = (slug === '/') ? 1 : (index % 2) + 2;
       let direction = (style % 2) ? 'left' : 'right';
       let img = getImage(featuredImage);
-      slug = slug || node.fileAbsolutePath.replace(/.*\/([0-9A-Za-z-]+)\/[^/]*$/, '/$1') || `/${node.id}`;
+      node.html = renderRichText(node.body);
 
       if (style === 1)
-        return (<Style1 key={node.id} {...{ node, style, title, teaser, featuredImage, featuredImageAlt, direction, img, slug }} />);
+        return (<Style1 key={node.id} {...{ node, style, title: bodyTitle, teaser: bodyTeaser, featuredImage, featuredImageAlt, direction, img, slug }} />);
       else
         return (<StyleN key={node.id} {...{ node, style, title, teaser, featuredImage, featuredImageAlt, direction, img, slug }} />);
 
@@ -132,6 +143,6 @@ const Pages = ({ nodes }) => (
   <>
     {processNodes(nodes)}
   </>
-)
+);
 
 export default Pages;

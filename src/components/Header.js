@@ -2,7 +2,6 @@ import React from 'react'
 import { Link as ScrollLink } from 'react-scroll';
 import { Link } from 'gatsby'
 import MobileMenu from './MobileMenu'
-import Typeform from './Typeform.js';
 
 
 const timeoutLength = 300
@@ -244,7 +243,7 @@ class Header extends React.Component {
                     duration={1500}
                     spy={true}
                   >
-                    Get involved
+                    {this.props.contact || 'Contact Us'}
             </ScrollLink>
 
                 </li>

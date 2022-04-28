@@ -14,14 +14,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
   const result = await graphql(`
 query {
-  allMarkdownRemark(sort: {fields: frontmatter___order, order: ASC}) {
+  allContentfulPage {
     nodes {
-      frontmatter {
         slug
         title
-        menu
-      }
-      fileAbsolutePath
       id
     }
   }
@@ -32,16 +28,19 @@ query {
     return;
   }
   // Create blog post pages.
-  result.data.allMarkdownRemark.nodes.forEach(({ fileAbsolutePath, id, frontmatter }, index) => {
-    let slug = frontmatter.slug || fileAbsolutePath.replace(/.*\/([0-9A-Za-z\-]+)\/[^\/]*$/, '/$1') || `/${id}`;
+  console.log({ result, page: result.data.allContentfulPage });
+  result.data.allContentfulPage.nodes.forEach(({ slug, title, id }, index) => {
+    let slugPath = slug.replace(/^\/*/, '/');
+    console.log('Creating', { slug, slugPath, title });
     createPage({
+      slug,
       // You can prepend it with any prefix you want
-      path: `${slug}`,
+      path: slugPath,
       // This component will wrap our MDX content
       component: path.resolve(`src/components/page-layout.js`),
       // You can use the values in this context in
       // our page layout component
-      context: { id: id, menu: frontmatter.menu, title: frontmatter.title, order: index + 10 },
+      context: { id, title, slug },
     });
   });
   return true;

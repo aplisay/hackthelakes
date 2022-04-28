@@ -1,61 +1,68 @@
-import React from 'react';
-import Helmet from 'react-helmet';
-import Layout from '../components/layout';
-import Interact from '../components/Interact';
-import { graphql } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import React from "react";
+import Helmet from "react-helmet";
+import Layout from "../components/layout";
+import Interact from "../components/Interact";
+import { graphql } from "gatsby";
+import { GatsbyImage } from "gatsby-plugin-image";
+import { renderRichText } from "gatsby-source-contentful/rich-text";
 
-const Page = ({ data: { markdownRemark: {frontmatter, html} } }) => (
-  <Layout>
-    <Helmet>
-      <title>{frontmatter.title}</title>
-      <meta name="description" content={frontmatter.teaser} />
-    </Helmet>
+const Page = props => {
 
-    <div id="main" className="wrapper style1">
-      <div className="container">
-        <header className="major">
-          <h2>{frontmatter.title}</h2>
-          <p>
-            {frontmatter.teaser}
-          </p>
-        </header>
+  let {
+    data: {
+      contentfulPage: { title, teaser, body, featuredImage, updatedAt },
+    },
+  } = props;
 
-        <section id="content">
-          {
-            false && (
+  return (
+    <Layout>
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={teaser} />
+      </Helmet>
+
+      <div id="main" className="wrapper style1">
+        <div className="container">
+          <header className="major">
+            <h2>{title}</h2>
+            <p>{teaser}</p>
+          </header>
+
+          <section id="content">
+            {false && (
               <a href="/" className="image fit">
                 <GatsbyImage
-                  image={frontmatter.featuredImage.childImageSharp.gatsbyImageData}
-                  alt={frontmatter.featuredImageAlt}
+                  image={
+                    featuredImage.gatsbyImageData
+                  }
+                  alt={featuredImage.title}
                 />
               </a>
             )}
-          <div dangerouslySetInnerHTML={{ __html: html }}/>
-        </section>
+            <div>{renderRichText(body)}</div>
+          </section>
+        </div>
       </div>
-    </div>
-    <Interact id="last-section"/>
-  </Layout>
-);
+      <Interact id="last-section" />
+    </Layout>
+  );
+};
 
 export const pageQuery = graphql`
-  query BlogPostQuery($id: String) {
-    markdownRemark(id: { eq: $id }) {
+  query BlogPostQuery($slug: String) {
+    contentfulPage(slug: { eq: $slug }) {
       id
-      html
-      frontmatter {
-        teaser
-        title
-        featuredImageAlt
-        featuredImage {
-          childImageSharp {
-            gatsbyImageData
-          }
-        }
+      body {
+        raw
+      }
+      teaser
+      title
+      updatedAt
+      featuredImage {
+        gatsbyImageData
       }
     }
   }
-`
+`;
 
 export default Page;
