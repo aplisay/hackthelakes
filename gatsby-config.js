@@ -60,31 +60,7 @@ module.exports = {
         icon: 'src/assets/images/website-icon.png', // This path is relative to the root of the site.
       },
     },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        path: `${__dirname}/src/assets/images`,
-        name: 'images',
-      },
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        path: `${__dirname}/content/pages`
-      }
-    },
-    {
-      resolve: `gatsby-remark-images`,
-      options: {
-        // It's important to specify the maxWidth (in pixels) of
-        // the content container as this plugin uses this as the
-        // base for generating different widths of each image.
-        maxWidth: 3400,
-        // Remove the default behavior of adding a link to each
-        // image.
-        linkImagesToOriginal: false,
-      },
-    },
+
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     {
@@ -115,20 +91,6 @@ module.exports = {
     {
       resolve: "gatsby-source-contentful",
       options: contentfulConfig
-    },
-    {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        // Footnotes mode (default: true)
-        footnotes: false,
-        // GitHub Flavored Markdown mode (default: true)
-        gfm: true,
-        excerpt_separator: `<!-- end excerpt -->`,
-        // Plugins configs
-        plugins: [
-          `gatsby-remark-images`
-        ],
-      },
     },
     
 

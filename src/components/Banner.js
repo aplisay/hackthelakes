@@ -1,18 +1,12 @@
 import React from 'react';
 import { Link as ScrollLink } from 'react-scroll';
-import { graphql, useStaticQuery } from 'gatsby';
-
 import { getImage } from "gatsby-plugin-image";
 import { convertToBgImage } from "gbimage-bridge";
 import BackgroundImage from 'gatsby-background-image';
 
 const Banner = props => {
-
-
-
   const imageData = getImage(props.bannerImage);
   const bgImage = convertToBgImage(imageData);
-
 
   return (
     <BackgroundImage
