@@ -36,9 +36,9 @@ if (!spaceId || !accessToken) {
 module.exports = {
   //pathPrefix: `/mygatsby`,
   siteMetadata: {
-    title: 'Hack the lakes',
+    title: 'Content driven site',
     author: 'rjp44',
-    description: 'hackthelakes site',
+    description: 'generic site',
 
   },
   plugins: [
