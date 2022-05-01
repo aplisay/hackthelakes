@@ -1,5 +1,3 @@
-console.log('ENV', process.env.NODE_ENV);
-
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 });
@@ -29,8 +27,6 @@ if (process.env.CONTENTFUL_HOST) {
 }
 
 const { spaceId, accessToken } = contentfulConfig;
-
-console.log({ contentfulConfig})
 
 if (!spaceId || !accessToken) {
   throw new Error(

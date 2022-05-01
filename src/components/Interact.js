@@ -3,8 +3,6 @@ import Fade from 'react-reveal/Fade';
 import { useStaticQuery, graphql } from 'gatsby';
 
 const Interact = props => {
-  console.log('PROPS', { props });
-
   const {
     allContentfulContactForm: { nodes }
   } = useStaticQuery(graphql`

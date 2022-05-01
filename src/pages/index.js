@@ -7,7 +7,6 @@ import Interact from "../components/Interact";
 
 class Home extends React.Component {
   render() {
-    console.log("PROPS", { props: this.props });
 
     let homepage = this.props.data.allContentfulHomepage.nodes[0];
 

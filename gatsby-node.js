@@ -28,10 +28,8 @@ query {
     return;
   }
   // Create blog post pages.
-  console.log({ result, page: result.data.allContentfulPage });
   result.data.allContentfulPage.nodes.forEach(({ slug, title, id }, index) => {
     let slugPath = slug.replace(/^\/*/, '/');
-    console.log('Creating', { slug, slugPath, title });
     createPage({
       slug,
       // You can prepend it with any prefix you want

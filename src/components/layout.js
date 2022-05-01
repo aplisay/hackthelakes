@@ -40,7 +40,6 @@ const Layout = ({ children, ...props }) => (
       );
       let { siteTitle:title , footerText, ...social } = data?.allContentfulSiteInformation?.nodes[0];
       let contactLink = data?.allContentfulMainMenu?.nodes[0]?.contactLinkName
-      console.log({ data, menu, title });
       return (
         <React.Fragment>
           <div className={props.location === "/" ? "landing" : ""}>

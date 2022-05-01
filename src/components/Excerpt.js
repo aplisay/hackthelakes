@@ -14,9 +14,6 @@ const options = {
 const Excerpt = props => {
     let markup = ReactDOMServer.renderToStaticMarkup(props.children);
     let html = excerptHtml(markup, options);
-
-
-    console.log('Excerpt', html)
   
     return <div dangerouslySetInnerHTML={{ __html: html }} />;
 
