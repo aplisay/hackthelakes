@@ -11,7 +11,7 @@ const Page = props => {
 
   let {
     data: {
-      contentfulPage: { title, teaser, body, featuredImage, gallery, updatedAt },
+      contentfulPage: { title, teaser, body, featuredImage, gallery},
     },
   } = props;
 

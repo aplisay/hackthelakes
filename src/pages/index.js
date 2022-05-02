@@ -1,10 +1,10 @@
 import React from "react";
+import Helmet from "react-helmet";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import Banner from "../components/Banner";
 import Pages from "../components/Pages";
 import Interact from "../components/Interact";
-import ImageGallery from "../components/ImageGallery";
 
 class Home extends React.Component {
   render() {
@@ -12,6 +12,10 @@ class Home extends React.Component {
 
     return (
       <Layout location="/">
+        <Helmet>
+          <title>{homepage.title}</title>
+          <meta name="description" content={homepage.titleDescription + homepage.bodyTeaser} />
+        </Helmet>
         <Banner key="banner" nextSection={homepage.id} {...homepage} />
         <Pages nodes={[homepage, ...homepage.pages]} />
         <Interact id="last-section" />

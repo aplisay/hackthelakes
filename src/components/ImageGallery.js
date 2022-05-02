@@ -1,5 +1,4 @@
 import React from "react";
-import Fade from "react-reveal/Fade";
 import { useStaticQuery, graphql } from "gatsby";
 import Gallery from "@browniebroke/gatsby-image-gallery";
 
