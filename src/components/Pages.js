@@ -4,6 +4,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { renderRichText } from "gatsby-source-contentful/rich-text";
 import Fade from 'react-reveal/Fade';
 import Excerpt from './Excerpt.js';
+import Gallery from "@browniebroke/gatsby-image-gallery";
 
 const Columns = props => {
 
@@ -30,7 +31,7 @@ const Columns = props => {
 };
 
 
-const Style1 = ({ node, style, title, teaser, direction, slug }) => (
+const Style1 = ({ node, style, title, teaser, direction, gallery, slug }) => (
   <section id={node.id} key={node.id} className={`style${style} bottom inactive`} >
 
     <span className="image fit main">
@@ -47,10 +48,11 @@ const Style1 = ({ node, style, title, teaser, direction, slug }) => (
                   <p>
                     {teaser}
                   </p>
-                </header>
-
+                   </header>
+                {gallery && node.html}
               </div>
-              <Columns>{node.html}</Columns>
+              {gallery && <div className="col-8 col-12-medium"><Gallery images={gallery} /></div>}
+              {!gallery && <Columns>{node.html}</Columns>}
             </div>
           </div>
         </div>
@@ -71,7 +73,7 @@ const Style1 = ({ node, style, title, teaser, direction, slug }) => (
   </section>
 );
 
-const StyleN = ({ node, style, direction, title, teaser, img, featuredImageAlt, slug }) => (
+const StyleN = ({ node, style, direction, title, teaser, img, gallery, featuredImageAlt, slug }) => (
   <section
     id={node.id}
     key={node.id}
@@ -124,14 +126,15 @@ const processNodes = nodes => {
       }
     ))
     .map((node, index) => {
-      let { title, teaser, featuredImage, featuredImageAlt, slug, bodyTitle, bodyTeaser } = node;
-      let style = (slug === '/') ? 1 : (index % 2) + 2;
+      let { title, teaser, featuredImage, featuredImageAlt, slug, bodyTitle, bodyTeaser, gallery } = node;
+      let style = (slug === '/' || (gallery && !featuredImage)) ? 1 : (index % 2) + 2;
+      slug = slug.replace(/^\/*/, '/');
       let direction = (style % 2) ? 'left' : 'right';
       let img = getImage(featuredImage);
       node.html = renderRichText(node.body);
 
       if (style === 1)
-        return (<Style1 key={node.id} {...{ node, style, title: bodyTitle, teaser: bodyTeaser, featuredImage, featuredImageAlt, direction, img, slug }} />);
+        return (<Style1 key={node.id} {...{ node, style, title: bodyTitle || title, teaser: bodyTeaser || teaser, featuredImage, featuredImageAlt, direction, img, slug, gallery }} />);
       else
         return (<StyleN key={node.id} {...{ node, style, title, teaser, featuredImage, featuredImageAlt, direction, img, slug }} />);
 

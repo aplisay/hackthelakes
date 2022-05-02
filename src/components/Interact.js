@@ -1,6 +1,7 @@
 import React from 'react';
 import Fade from 'react-reveal/Fade';
 import { useStaticQuery, graphql } from 'gatsby';
+import { renderRichText } from "gatsby-source-contentful/rich-text";
 
 const Interact = props => {
   const {
@@ -11,7 +12,10 @@ const Interact = props => {
     nodes {
         id
         heading
-        description
+        description {
+          raw
+        }
+
         link
         linkText
         format
@@ -31,7 +35,7 @@ const Interact = props => {
                     <header>
                       <h2>{form.heading}</h2>
                       <p>
-                        {form.description}
+                        {form.description && renderRichText(form.description)}
                       </p>
                     </header>
                     <ul className="actions fit">

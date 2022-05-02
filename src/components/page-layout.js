@@ -3,14 +3,15 @@ import Helmet from "react-helmet";
 import Layout from "../components/layout";
 import Interact from "../components/Interact";
 import { graphql } from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image";
+import { getImage, GatsbyImage } from "gatsby-plugin-image";
+import Gallery from "@browniebroke/gatsby-image-gallery";
 import { renderRichText } from "gatsby-source-contentful/rich-text";
 
 const Page = props => {
 
   let {
     data: {
-      contentfulPage: { title, teaser, body, featuredImage, updatedAt },
+      contentfulPage: { title, teaser, body, featuredImage, gallery, updatedAt },
     },
   } = props;
 
@@ -29,17 +30,14 @@ const Page = props => {
           </header>
 
           <section id="content">
-            {false && (
               <a href="/" className="image fit">
-                <GatsbyImage
-                  image={
-                    featuredImage.gatsbyImageData
-                  }
+                {featuredImage && <GatsbyImage
+                  image={getImage(featuredImage)}
                   alt={featuredImage.title}
-                />
+                />}
               </a>
-            )}
             <div>{renderRichText(body)}</div>
+            {gallery && <div><Gallery images={gallery} /></div>}
           </section>
         </div>
       </div>
@@ -60,6 +58,15 @@ export const pageQuery = graphql`
       updatedAt
       featuredImage {
         gatsbyImageData
+      }
+      gallery {
+        thumb: gatsbyImageData(
+              width: 270
+
+              placeholder: BLURRED
+              layout: FIXED
+            )
+            full: gatsbyImageData(layout: FULL_WIDTH)
       }
     }
   }

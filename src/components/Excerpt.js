@@ -6,7 +6,8 @@ import * as excerptHtml from 'excerpt-html';
 const options = {
   moreRegExp: /<!-- end excerpt -->/i,  // Search for the slug
   stripTags: false, // Set to false to get html code
-  pruneLength: 500, // Amount of characters that the excerpt should contain
+  pruneLength: 1000, // Amount of characters that the excerpt should contain
+  pruneString: '…',
   pruneSeparator: ' ', // Separator to be used to separate words
 };
 

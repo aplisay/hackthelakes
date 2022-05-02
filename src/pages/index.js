@@ -4,10 +4,10 @@ import Layout from "../components/layout";
 import Banner from "../components/Banner";
 import Pages from "../components/Pages";
 import Interact from "../components/Interact";
+import ImageGallery from "../components/ImageGallery";
 
 class Home extends React.Component {
   render() {
-
     let homepage = this.props.data.allContentfulHomepage.nodes[0];
 
     return (
@@ -43,10 +43,19 @@ export const query = graphql`
         titleDescription
         pages {
           id
+          slug
           title
           teaser
           featuredImage {
             gatsbyImageData
+          }
+          gallery {
+            thumb: gatsbyImageData(
+              width: 270
+              height: 270
+              placeholder: BLURRED
+            )
+            full: gatsbyImageData(layout: FULL_WIDTH)
           }
           body {
             raw
