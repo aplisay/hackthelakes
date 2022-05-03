@@ -32,13 +32,9 @@ const Columns = props => {
 
 
 const Style1 = ({ node, style, title, teaser, direction, gallery, slug }) => (
-  <section id={node.id} key={node.id} className={`style${style} bottom inactive`} >
+  <section id={node.id} key={node.id} className={`wrapper style${style} bottom inactive`} >
 
-    <span className="image fit main">
-
-    </span>
     <Fade bottom big>
-      <div>
         <div className="content">
           <div className="container">
             <div className="row">
@@ -67,7 +63,7 @@ const Style1 = ({ node, style, title, teaser, direction, gallery, slug }) => (
         >
           Next
         </ScrollLink>
-      </div>
+      
 
     </Fade>
   </section>

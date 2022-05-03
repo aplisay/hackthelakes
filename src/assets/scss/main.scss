@@ -5,7 +5,7 @@
 @import 'libs/breakpoints';
 @import 'libs/html-grid';
 @import url('../css/fontawesome-all.min.css');
-@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,100italic,300italic");
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,100italic,300italic&display=swap");
 
 /*
 	Landed by HTML5 UP
@@ -1568,7 +1568,9 @@
       max-height: 95%;
       padding: $size-wrapper-pad-tb;
       padding-top: 30%;
-      position: relative;
+      position: absolute;
+      bottom: 20%;
+      left: 10%;
 			z-index: 1;
 
 			header {
