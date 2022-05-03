@@ -79,12 +79,6 @@ const StyleN = ({ node, style, direction, title, teaser, img, gallery, featuredI
     key={node.id}
     className={`spotlight style${style} ${direction} inactive`}
     style={{ backgroundImage: `url(${img.images.fallback.src})` }}>
-    <span className="image fit main">
-      <GatsbyImage
-        image={img}
-        alt={featuredImageAlt || title}
-      />
-    </span>
     <Fade right big>
       <div className="content">
         <header>
@@ -95,7 +89,7 @@ const StyleN = ({ node, style, direction, title, teaser, img, gallery, featuredI
         <ul className="actions">
           <li>
             <a href={slug} className="button" alt="featuredImageAlt">
-              Learn More
+              More About {title}
             </a>
           </li>
         </ul>
