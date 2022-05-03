@@ -21,7 +21,7 @@ const linkTypes = [
 const Footer = (props) => (
   <footer id="footer">
     <ul className="icons">
-      {props.links.map((link) => {
+      {props.links.map((link, index) => {
         let { type, className } = linkTypes.reduce(
           (o, [regex, type, className]) =>
             o || (link.match(regex) && { type, className }),
@@ -31,12 +31,13 @@ const Footer = (props) => (
           link = `mailto:${link}`;
         }
         return (
-          <li>
+          <li key={`icon-${index}`}>
             <a
               href={link}
               className={className}
               target="_blank"
               rel="noreferrer"
+              title={type}
             >
               <span className="label">{type}</span>
             </a>

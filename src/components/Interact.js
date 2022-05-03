@@ -30,13 +30,11 @@ const Interact = props => {
           <div className="container">
             <div className="row">
               {nodes.map(form => (
-                <div className="col-6 col-12-medium container ">
+                <div className="col-6 col-12-medium container " key={`contact-${form.link}`}>
                   <div className="col-4 col-12-medium container">
                     <header>
                       <h2>{form.heading}</h2>
-                      <p>
                         {form.description && renderRichText(form.description)}
-                      </p>
                     </header>
                     <ul className="actions fit">
                       <li>

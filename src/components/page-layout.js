@@ -33,7 +33,7 @@ const Page = props => {
               <a href="/" className="image fit">
                 {featuredImage && <GatsbyImage
                   image={getImage(featuredImage)}
-                  alt={featuredImage.title}
+                  alt={featuredImage.title || 'featuredImage'}
                 />}
               </a>
             <div>{renderRichText(body)}</div>
@@ -62,7 +62,7 @@ export const pageQuery = graphql`
       gallery {
         thumb: gatsbyImageData(
               width: 270
-
+              height: 270
               placeholder: BLURRED
               layout: FIXED
             )
