@@ -13,15 +13,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Destructure the createPage function from the actions object
   const { createPage } = actions;
   const result = await graphql(`
-query {
-  allContentfulPage {
-    nodes {
-        slug
-        title
-      id
+    query {
+      allContentfulPage {
+        nodes {
+          slug
+          title
+          id
+        }
+      }
     }
-  }
-}
   `);
   if (result.errors) {
     reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query');
@@ -29,7 +29,7 @@ query {
   }
   // Create blog post pages.
   result.data.allContentfulPage.nodes.forEach(({ slug, title, id }, index) => {
-    let slugPath = slug.replace(/^\/*/, '/');
+    let slugPath = slug.replace(/^\/*/, "/");
     createPage({
       slug,
       // You can prepend it with any prefix you want
@@ -44,19 +44,16 @@ query {
   return true;
 };
 // TODO: temporary workaround for https://github.com/gatsbyjs/gatsby/issues/31878
-exports.onCreateWebpackConfig = ({
-  actions,
-  plugins,
-  stage,
-  getConfig
-}) => {
-
-
-  DEBUG_webpack && console.info(`webpack: ${stage}: \n`, JSON.stringify(getConfig(), null, "  "));
+exports.onCreateWebpackConfig = ({ actions, plugins, stage, getConfig }) => {
+  DEBUG_webpack &&
+    console.info(
+      `webpack: ${stage}: \n`,
+      JSON.stringify(getConfig(), null, "  ")
+    );
   // override config only during production JS & CSS build
-  if (stage === 'build-javascript') {
+  if (stage === "build-javascript") {
     // get current webpack config
-    const config = getConfig()
+    const config = getConfig();
 
     const options = {
       minimizerOptions: {
@@ -114,19 +111,18 @@ exports.onCreateWebpackConfig = ({
             },
           },
         ],
-      }
-    }
+      },
+    };
     // find CSS minimizer
     const minifyCssIndex = config.optimization.minimizer.findIndex(
-      minimizer => minimizer.constructor.name ===
-        'CssMinimizerPlugin'
-    )
+      (minimizer) => minimizer.constructor.name === "CssMinimizerPlugin"
+    );
     // if found, overwrite existing CSS minimizer with the new one
     if (minifyCssIndex > -1) {
       config.optimization.minimizer[minifyCssIndex] =
-        plugins.minifyCss(options)
+        plugins.minifyCss(options);
     }
     // replace webpack config with the modified object
-    actions.replaceWebpackConfig(config)
+    actions.replaceWebpackConfig(config);
   }
 };
