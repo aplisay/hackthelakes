@@ -35,6 +35,7 @@ const Map = (props) => {
   let data = useStaticQuery(graphql`
     query MarkerQuery {
       contentfulSiteInformation {
+        googleMapsAPIKey
         mapMarker {
           marker: gatsbyImageData(width: 50, placeholder: BLURRED)
         }
@@ -45,6 +46,7 @@ const Map = (props) => {
   let {
     contentfulSiteInformation: {
       mapMarker: { marker },
+      googleMapsAPIKey
     },
   } = data;
 
@@ -53,7 +55,7 @@ const Map = (props) => {
 
   return (
     <>
-      {isClient && GOOGLE_MAPS_API_KEY && (
+      {isClient && googleMapsAPIKey && (
         <div style={{ position: "relative", paddingTop: "75%" }}>
           <div
             style={{
@@ -65,7 +67,7 @@ const Map = (props) => {
             }}
           >
             <GoogleMapReact
-              bootstrapURLKeys={{ key: GOOGLE_MAPS_API_KEY }}
+              bootstrapURLKeys={{ key: googleMapsAPIKey }}
               defaultCenter={[lat, lon]}
               defaultZoom={zoom}
             >

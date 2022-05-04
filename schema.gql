@@ -1,4 +1,4 @@
-### Type definitions saved at 2022-05-04T14:03:30.531Z ###
+### Type definitions saved at 2022-05-04T14:35:57.439Z ###
 
 interface ContentfulEntry implements Node {
   contentful_id: String!
@@ -401,6 +401,7 @@ type ContentfulSiteInformation implements ContentfulReference & ContentfulEntry 
   footerText: ContentfulSiteInformationFooterText
   links: [String]
   googleAnalyticsTag: String
+  googleMapsAPIKey: String
   logo: ContentfulAsset @link(by: "id", from: "logo___NODE")
   mapMarker: ContentfulAsset @link(by: "id", from: "mapMarker___NODE")
   spaceId: String
