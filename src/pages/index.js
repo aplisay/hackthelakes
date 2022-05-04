@@ -61,6 +61,10 @@ export const query = graphql`
             )
             full: gatsbyImageData(layout: FULL_WIDTH)
           }
+          location {
+            lat
+            lon
+          }
           body {
             raw
           }

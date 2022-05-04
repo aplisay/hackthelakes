@@ -5,16 +5,18 @@ import Interact from "../components/Interact";
 import { graphql } from "gatsby";
 import { getImage, GatsbyImage } from "gatsby-plugin-image";
 import Gallery from "@browniebroke/gatsby-image-gallery";
-import { renderRichText } from "gatsby-source-contentful/rich-text";
+import RichText from "./RichText";
+import Map from "./GoogleMap";
+
 
 const Page = props => {
 
   let {
     data: {
-      contentfulPage: { title, teaser, body, featuredImage, gallery},
+      contentfulPage: { title, teaser, body, featuredImage, gallery, location},
     },
   } = props;
-
+  console.log({ title, teaser, body, featuredImage, gallery, location})
   return (
     <Layout>
       <Helmet>
@@ -35,8 +37,17 @@ const Page = props => {
                   image={getImage(featuredImage)}
                   alt={featuredImage.title || 'featuredImage'}
                 />}
-              </a>
-            <div>{renderRichText(body)}</div>
+            </a>
+            {location && 
+              <div className="row">
+                <div className="col-3 col-12-medium">
+                  <RichText content={body} />
+                </div>
+                <div className="col-9 col-12-medium">
+                    <Map {...location} />
+                </div>
+              </div>}
+            {!location && <RichText content={body} />}
             {gallery && <div><Gallery images={gallery} /></div>}
           </section>
         </div>
@@ -58,6 +69,10 @@ export const pageQuery = graphql`
       updatedAt
       featuredImage {
         gatsbyImageData
+      }
+      location {
+        lat
+        lon
       }
       gallery {
         thumb: gatsbyImageData(
