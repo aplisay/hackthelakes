@@ -53,7 +53,7 @@ const Map = (props) => {
 
   return (
     <>
-      {isClient && (
+      {isClient && GOOGLE_MAPS_API_KEY && (
         <div style={{ position: "relative", paddingTop: "75%" }}>
           <div
             style={{
