@@ -1,9 +1,10 @@
 import React from "react";
 import { StaticQuery, graphql } from "gatsby";
+import { renderRichText } from "gatsby-source-contentful/rich-text";
 import "../assets/scss/main.scss";
 import Header from "./Header";
 import Footer from "./Footer";
-import { renderRichText } from "gatsby-source-contentful/rich-text";
+import Analytics from "./Analytics";
 
 const Layout = ({ children, ...props }) => (
   <StaticQuery
@@ -29,7 +30,7 @@ const Layout = ({ children, ...props }) => (
             footerText {
               raw
             }
-             links
+            links
           }
         }
       }
@@ -38,10 +39,15 @@ const Layout = ({ children, ...props }) => (
       let menu = data?.allContentfulMainMenu?.nodes[0]?.references?.map(
         ({ title, slug }) => ({ name: title, link: slug.replace(/^\/*/, "/") })
       );
-      let { siteTitle:title , footerText, ...social } = data?.allContentfulSiteInformation?.nodes[0];
-      let contactLink = data?.allContentfulMainMenu?.nodes[0]?.contactLinkName
+      let {
+        siteTitle: title,
+        footerText,
+        ...social
+      } = data?.allContentfulSiteInformation?.nodes[0];
+      let contactLink = data?.allContentfulMainMenu?.nodes[0]?.contactLinkName;
       return (
         <React.Fragment>
+          <Analytics />
           <div className={props.location === "/" ? "landing" : ""}>
             <div id="page-wrapper">
               <Header
@@ -51,9 +57,7 @@ const Layout = ({ children, ...props }) => (
                 landing={props.location === "/"}
               />
               {children}
-              <Footer {...social}>
-                {renderRichText(footerText)}
-              </Footer>  
+              <Footer {...social}>{renderRichText(footerText)}</Footer>
             </div>
           </div>
         </React.Fragment>
