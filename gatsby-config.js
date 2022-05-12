@@ -44,9 +44,6 @@ module.exports = {
   plugins: [
     'gatsby-plugin-image',
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-web-font-loader',
-
-
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     {
