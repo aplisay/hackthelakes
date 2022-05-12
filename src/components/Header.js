@@ -128,6 +128,7 @@ class Header extends React.Component {
                           onMouseLeave={this.leaveButton}
                           className={link.cl}
                           to={link.link}
+                          href={link.link}
                         >
                           {link.name}
                         </Link>
@@ -242,6 +243,7 @@ class Header extends React.Component {
                     offset={50}
                     duration={1500}
                     spy={true}
+                    href="#last-section"
                   >
                     {this.props.contact || 'Contact Us'}
             </ScrollLink>

@@ -1,4 +1,4 @@
-### Type definitions saved at 2022-05-04T14:35:57.439Z ###
+### Type definitions saved at 2022-05-12T10:57:16.184Z ###
 
 interface ContentfulEntry implements Node {
   contentful_id: String!
@@ -122,6 +122,7 @@ type ContentfulAsset implements ContentfulReference & Node & RemoteFile @derived
   filename: String
   width: Int
   height: Int
+  size: Int
 }
 
 """Remote Interface"""
@@ -304,6 +305,7 @@ enum RemoteFileLayout {
 enum RemoteFilePlaceholder {
   DOMINANT_COLOR
   BLURRED
+  TRACED_SVG
   NONE
 }
 

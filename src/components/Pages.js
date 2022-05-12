@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Link as ScrollLink } from "react-scroll";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { renderRichText } from "gatsby-source-contentful/rich-text";
+import { getImage } from "gatsby-plugin-image";
 import Fade from "react-reveal/Fade";
 import Excerpt from "./Excerpt.js";
 import Gallery from "@browniebroke/gatsby-image-gallery";
@@ -79,6 +78,7 @@ const Style1 = ({
         offset={50}
         duration={1500}
         spy={true}
+        href={`#${node.nextSection}`}
       >
         Next
       </ScrollLink>
@@ -127,6 +127,7 @@ const StyleN = ({
       offset={25}
       duration={1500}
       spy={true}
+      href={`#${node.nextSection}`}
     >
       Next
     </ScrollLink>

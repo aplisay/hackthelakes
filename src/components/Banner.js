@@ -35,6 +35,7 @@ const Banner = props => {
         offset={0}
         duration={1500}
         spy={true}
+        href={`#${props.nextSection}`}
       >
         Next
       </ScrollLink>
