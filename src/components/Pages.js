@@ -121,8 +121,9 @@ const StyleN = ({
       <div className="content">
         <header>
           <h2>{title}</h2>
-          <RichText content={teaser} />
+     
         </header>
+        <RichText content={teaser} />
         <ul className="actions">
           <li>
             <a href={slug} className="button">
