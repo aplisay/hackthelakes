@@ -1,4 +1,4 @@
-### Type definitions saved at 2022-05-12T12:01:52.729Z ###
+### Type definitions saved at 2022-05-13T11:12:19.134Z ###
 
 interface ContentfulEntry implements Node {
   contentful_id: String!
@@ -441,6 +441,7 @@ type ContentfulPage implements ContentfulReference & ContentfulEntry & Node @der
   contentful_id: String!
   node_locale: String!
   title: String
+  teaser: ContentfulPageTeaser
   body: ContentfulPageBody
   slug: String
   featuredImage: ContentfulAsset @link(by: "id", from: "featuredImage___NODE")
@@ -451,8 +452,11 @@ type ContentfulPage implements ContentfulReference & ContentfulEntry & Node @der
   createdAt: Date @dateformat
   updatedAt: Date @dateformat
   sys: ContentfulPageSys
-  teaser: String
   location: ContentfulPageLocation
+}
+
+type ContentfulPageTeaser {
+  raw: String
 }
 
 type ContentfulPageBody {
@@ -465,7 +469,7 @@ type ContentfulHomepage implements ContentfulReference & ContentfulEntry & Node 
   title: String
   titleDescription: String
   bodyTitle: String
-  bodyTeaser: String
+  bodyTeaser: ContentfulHomepageBodyTeaser
   body: ContentfulHomepageBody
   slug: String
   bannerImage: ContentfulAsset @link(by: "id", from: "bannerImage___NODE")
@@ -474,6 +478,10 @@ type ContentfulHomepage implements ContentfulReference & ContentfulEntry & Node 
   createdAt: Date @dateformat
   updatedAt: Date @dateformat
   sys: ContentfulHomepageSys
+}
+
+type ContentfulHomepageBodyTeaser {
+  raw: String
 }
 
 type ContentfulHomepageBody {

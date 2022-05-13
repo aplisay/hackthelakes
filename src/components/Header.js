@@ -112,7 +112,7 @@ class Header extends React.Component {
           </div>
         </div>
 
-        <header id="header" style={{ backgroundColor: 'rgba(0,0,0,0.4)'}}>
+        <header id="header" style={{ backgroundColor: 'rgba(0,0,0,0.6)'}}>
           <h1 id="logo">
             <Link to="/">{siteTitle}</Link>
           </h1>
@@ -228,7 +228,7 @@ class Header extends React.Component {
                     </React.Fragment>
                   ) : (
                     <li key={link.name}>
-                      <Link className={link.cl} to={link.link}>
+                      <Link className="link depth-0" to={link.link}>
                         {link.name}
                       </Link>
                     </li>

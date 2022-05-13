@@ -1469,7 +1469,7 @@
 
 	#header {
 		background: _palette(accent2-transparent);
-		box-shadow: 0 0 0.25em 0 rgba(0,0,0,0.25);
+		box-shadow: 0 0 0.3em 0 rgba(0,0,0,0.25);
 		cursor: default;
 		height: 3.5em;
 		left: 0;
@@ -1507,6 +1507,7 @@
 						height: inherit;
 						line-height: inherit;
 						outline: 0;
+            font-weight: 300;
 
 						&.button {
 							height: 2em;
@@ -1526,7 +1527,7 @@
 					}
 
 					> ul {
-						/*display: none;*/
+						display: none;
 					}
 				}
 			}
@@ -1767,7 +1768,7 @@
 					padding: $size-wrapper-pad-tb $size-wrapper-pad-lr ($size-wrapper-pad-tb - _size(element-margin)) $size-wrapper-pad-lr !important;
 					position: relative;
 					right: auto !important;
-					text-align: center;
+					text-align: left;
 					top: auto !important;
 					width: 100% !important;
 
@@ -2038,6 +2039,7 @@
 					height: 3em;
 					line-height: 3em;
 					text-decoration: none;
+
 
 					&:hover {
 						color: inherit !important;

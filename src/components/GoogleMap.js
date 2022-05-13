@@ -2,6 +2,7 @@ import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import GoogleMapReact from "google-map-react";
 import { getImage, GatsbyImage } from "gatsby-plugin-image";
+import FixedSize from "./FixedSize";
 
 const { GOOGLE_MAPS_API_KEY } = process.env;
 
@@ -56,16 +57,7 @@ const Map = (props) => {
   return (
     <>
       {isClient && googleMapsAPIKey && (
-        <div style={{ position: "relative", paddingTop: "75%" }}>
-          <div
-            style={{
-              position: "absolute",
-              height: "100%",
-              width: "100%",
-              top: 0,
-              left: 0,
-            }}
-          >
+       <FixedSize height="75%">
             <GoogleMapReact
               bootstrapURLKeys={{ key: googleMapsAPIKey }}
               defaultCenter={[lat, lon]}
@@ -73,8 +65,7 @@ const Map = (props) => {
             >
               <Marker {...{ lat, lng: lon }} image={marker} />
             </GoogleMapReact>
-          </div>
-        </div>
+        </FixedSize>
       )}
     </>
   );

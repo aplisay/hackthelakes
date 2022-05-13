@@ -17,7 +17,6 @@ const Layout = ({ children, ...props }) => (
               ... on ContentfulPage {
                 id
                 title
-                teaser
                 slug
               }
             }

@@ -41,7 +41,9 @@ export const query = graphql`
           raw
         }
         slug
-        bodyTeaser
+        bodyTeaser {
+          raw
+        }
         bodyTitle
         title
         titleDescription
@@ -49,7 +51,9 @@ export const query = graphql`
           id
           slug
           title
-          teaser
+          teaser {
+            raw
+          }
           featuredImage {
             gatsbyImageData
           }

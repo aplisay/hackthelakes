@@ -5,6 +5,7 @@
   "author": "Rob Pickering",
   "dependencies": {
     "@browniebroke/gatsby-image-gallery": "^7.0.6",
+    "@contentful/rich-text-plain-text-renderer": "^15.12.1",
     "@loadable/component": "^5.15.2",
     "dotenv": "^16.0.0",
     "excerpt-html": "^1.2.2",

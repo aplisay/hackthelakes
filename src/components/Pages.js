@@ -2,16 +2,18 @@ import * as React from "react";
 import { Link as ScrollLink } from "react-scroll";
 import { getImage } from "gatsby-plugin-image";
 import Fade from "react-reveal/Fade";
-import Excerpt from "./Excerpt.js";
 import Gallery from "@browniebroke/gatsby-image-gallery";
-import RichText from "./RichText.js";
+import { RichText, plainText } from "./RichText.js";
 import Map from "./GoogleMap.js";
 
 const Columns = (props) => {
   let { children } = props;
 
-  let sections = children.reduce(
+  console.log({ children });
+
+  let sections = React.Children.toArray(children).reduce(
     (o, c) => {
+      console.log({ c })
       if (c.type === "hr") o.push([]);
       else o[o.length - 1].push(c);
       return o;
@@ -52,14 +54,26 @@ const Style1 = ({
             <div className="col-4 col-12-medium">
               <header>
                 <h2>{title}</h2>
-                <p>{teaser}</p>
               </header>
-              {(gallery || location) && <RichText content={node.body}/>}
+              <RichText content={teaser} />
+              {location && node.body && (
+                <div className="right" style={{ width: '100%', align: 'right' }}>
+                  <ul className="actions">
+                    <li>
+                      <a href={slug} className="button">
+                        More Directions
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
             {location && (
-              <div className="col-8 col-12-medium">
-                <Map {...location} />
-              </div>
+              <>
+                <div className="col-8 col-12-medium">
+                  <Map {...location} />
+                </div>
+              </>
             )}
             {gallery && (
               <div className="col-8 col-12-medium">
@@ -107,12 +121,11 @@ const StyleN = ({
       <div className="content">
         <header>
           <h2>{title}</h2>
-          <p>{teaser}</p>
+          <RichText content={teaser} />
         </header>
-        <Excerpt><RichText content={node.body} /></Excerpt>
         <ul className="actions">
           <li>
-            <a href={slug} className="button" alt="featuredImageAlt">
+            <a href={slug} className="button">
               More About {title}
             </a>
           </li>
