@@ -8,21 +8,19 @@ const Interact = props => {
     allContentfulContactForm: { nodes }
   } = useStaticQuery(graphql`
     query ContactQuery {
-    allContentfulContactForm(sort: {fields: format}) {
+  allContentfulContactForm(sort: {format: ASC}) {
     nodes {
-        id
-        heading
-        description {
-          raw
-        }
-
-        link
-        linkText
-        format
+      id
+      heading
+      description {
+        raw
       }
+      link
+      linkText
+      format
     }
   }
-  `);
+}`);
   return (
     <>
       {nodes.length && <section id={props.id || 'interact'} className="wrapper style2 special fade inactive">
