@@ -13,7 +13,7 @@ const Page = props => {
 
   let {
     data: {
-      contentfulPage: { title, teaser, body, featuredImage, gallery, location},
+      contentfulPage: { title, teaser, body, featuredImage, omitFeatureImage, gallery, location},
     },
   } = props;
   return (
@@ -31,7 +31,7 @@ const Page = props => {
 
           <section id="content">
               <a href="/" className="image fit">
-                {featuredImage && <GatsbyImage
+              {featuredImage && !omitFeatureImage && <GatsbyImage
                   image={getImage(featuredImage)}
                   alt={featuredImage.title || 'featuredImage'}
                 />}
@@ -64,7 +64,17 @@ export const pageQuery = graphql`
       id
       body {
         raw
+        references {
+        ... on ContentfulAsset {
+          contentful_id
+          __typename
+          file {
+            url
+          }
+        }
+        }
       }
+      
       teaser {
         raw
       }
@@ -73,6 +83,7 @@ export const pageQuery = graphql`
       featuredImage {
         gatsbyImageData
       }
+      omitFeatureImage
       location {
         lat
         lon

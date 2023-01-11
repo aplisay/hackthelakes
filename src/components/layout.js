@@ -36,7 +36,7 @@ const Layout = ({ children, ...props }) => (
     `}
     render={(data) => {
       let menu = data?.allContentfulMainMenu?.nodes[0]?.references?.map(
-        ({ title, slug }) => ({ name: title, link: slug.replace(/^\/*/, "/") })
+        ({ title, slug }) => ({ name: title, link: slug && slug.replace(/^\/*/, "/") })
       );
       let {
         siteTitle: title,
