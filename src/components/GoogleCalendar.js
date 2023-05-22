@@ -1,8 +1,10 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
-import GoogleMapReact from "google-map-react";
 import { getImage, GatsbyImage } from "gatsby-plugin-image";
+import axios from 'axios';
 import FixedSize from "./FixedSize";
+
+
 
 const isClient = typeof window !== "undefined";
 const markerSize = 50;
@@ -19,42 +21,20 @@ const style = {
   transform: "translate(-50%, -50%)",
 };
 
-const Marker = ({ lat, lng, image }) => (
-  <GatsbyImage
-    image={getImage(image)}
-    alt="Map Marker"
-    width={markerSize}
-    lat={lat}
-    lng={lng}
-    style={style}
-  />
-);
+async function getCalendarEvents(calendar, key) {
+  let now = (new Date()).toISOString;
+  let path = `https://www.googleapis.com/calendar/v3/calendars/${calendar}/events?key=${key}&singleEvents=true&orderBy=startTime&timeMin=${now}`
+  let { data } = await axios.get(path);
+  console.log({ data });
+  return data;
+}
 
-const Map = (props) => {
-  let data = useStaticQuery(graphql`
-    query MarkerQuery {
-      contentfulSiteInformation {
-        googleMapsAPIKey
-        mapMarker {
-          marker: gatsbyImageData(width: 50, placeholder: BLURRED)
-        }
-      }
-    }
-  `);
+const Calendar = ({ calendar, key, eventId }) => {
 
-  let {
-    contentfulSiteInformation: {
-      mapMarker: { marker },
-      googleMapsAPIKey
-    },
-  } = data;
-
-  let [lat, lon] = [parseFloat(props.lat), parseFloat(props.lon)];
-  let { zoom = 11 } = props;
 
   return (
     <>
-      {isClient && googleMapsAPIKey && (
+      {isClient && calendar && key && (
        <FixedSize height="75%">
             <GoogleMapReact
               bootstrapURLKeys={{ key: googleMapsAPIKey }}

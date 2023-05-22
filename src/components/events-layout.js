@@ -13,7 +13,7 @@ const Page = props => {
 
   let {
     data: {
-      contentfulPage: { title, teaser, body, featuredImage, omitFeatureImage, gallery, location},
+      contentfulEventPage: { title, teaser, body, featuredImage, omitFeatureImage, gallery},
     },
   } = props;
   return (
@@ -36,19 +36,6 @@ const Page = props => {
                   alt={featuredImage.title || 'featuredImage'}
                 />}
             </a>
-            {location && 
-              <>
-              <div className="row">
-                <div className="col-3 col-12-medium">
-                  <span><RichText content={teaser} /></span>
-                </div>
-                <div className="col-9 col-12-medium">
-                    <Map {...location} />
-                </div>
-              </div>
-              <div><RichText content={body} /></div>
-            </>}
-            {!location && <RichText content={body} />}
             {gallery && <div><Gallery images={gallery} /></div>}
           </section>
         </div>
@@ -59,20 +46,12 @@ const Page = props => {
 };
 
 export const pageQuery = graphql`
-  query BlogPostQuery($slug: String) {
-    contentfulPage(slug: { eq: $slug }) {
+  query BlogEventQuery($slug: String) {
+    contentfulEventPage(slug: { eq: $slug }) {
       id
       body {
         raw
-        references {
-        ... on ContentfulAsset {
-          contentful_id
-          __typename
-          file {
-            url
-          }
-        }
-        }
+
       }
       
       teaser {
@@ -84,19 +63,7 @@ export const pageQuery = graphql`
         gatsbyImageData
       }
       omitFeatureImage
-      location {
-        lat
-        lon
-      }
-        gallery {
-          thumb: gatsbyImageData(
-                width: 270
-                height: 270
-                placeholder: BLURRED
-                layout: FIXED
-              )
-              full: gatsbyImageData(layout: FULL_WIDTH)
-        }
+
     }
   }
 `;

@@ -79,9 +79,7 @@ module.exports = {
       resolve: `gatsby-plugin-schema-snapshot`,
       options: {
         path: `schema.gql`,
-        include: {
-          plugins: [`gatsby-source-contentful`],
-        },
+
         update: process.env.NODE_ENV === 'development' && !process.env.GATSBY_NO_UPDATE_SCHEMA_SNAPSHOT,
       },
     },
