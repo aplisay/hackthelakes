@@ -126,7 +126,8 @@ const Calendar = ({ calendar, apiKey, eventId }) => {
               ))}
             </tbody>
               <tfoot>
-                <tr><td>
+              <tr><td>
+                <h2>Full Calendar</h2>
                   <iframe src={`https://calendar.google.com/calendar/embed?src=${calendar}&ctz=Europe%2FLondon`} style={{ border: 0 }} width="800" height="600" frameborder="0" scrolling="no"></iframe>
                 </td></tr>
             </tfoot>

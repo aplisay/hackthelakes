@@ -40,8 +40,11 @@ const Page = props => {
                   alt={featuredImage.title || 'featuredImage'}
               />}
             </span>
+            <h2>Events</h2>
             
-              <Calendar calendar={googleCalendarId} apiKey={googleCalendarApiKey} />
+            <Calendar calendar={googleCalendarId} apiKey={googleCalendarApiKey} />
+            
+            <h2>Events Gallery</h2>
 
             {gallery && <div><Gallery images={gallery} /></div>}
           </section>
