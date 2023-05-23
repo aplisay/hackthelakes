@@ -5,6 +5,8 @@ import Interact from "../components/Interact";
 import { graphql } from "gatsby";
 import { getImage, GatsbyImage } from "gatsby-plugin-image";
 import Gallery from "@browniebroke/gatsby-image-gallery";
+import Calendar from './GoogleCalendar';
+
 import { RichText, plainText } from "./RichText";
 import Map from "./GoogleMap";
 
@@ -13,7 +15,8 @@ const Page = props => {
 
   let {
     data: {
-      contentfulEventPage: { title, teaser, body, featuredImage, omitFeatureImage, gallery},
+      contentfulEventPage: { title, teaser, body, featuredImage, omitFeatureImage, googleCalendarApiKey,
+      googleCalendarId, gallery},
     },
   } = props;
   return (
@@ -27,15 +30,19 @@ const Page = props => {
         <div className="container">
           <header className="major">
             <h2>{title}</h2>
+            <div><RichText content={body} /></div>
           </header>
 
           <section id="content">
-              <a href="/" className="image fit">
+              <span className="image fit">
               {featuredImage && !omitFeatureImage && <GatsbyImage
                   image={getImage(featuredImage)}
                   alt={featuredImage.title || 'featuredImage'}
-                />}
-            </a>
+              />}
+            </span>
+            
+              <Calendar calendar={googleCalendarId} apiKey={googleCalendarApiKey} />
+
             {gallery && <div><Gallery images={gallery} /></div>}
           </section>
         </div>
@@ -63,8 +70,20 @@ export const pageQuery = graphql`
         gatsbyImageData
       }
       omitFeatureImage
+      googleCalendarApiKey
+      googleCalendarId
+      gallery {
+        thumb: gatsbyImageData(
+              width: 270
+              height: 270
+              placeholder: BLURRED
+              layout: FIXED
+         )
+        full: gatsbyImageData(layout: FULL_WIDTH)
+     }
 
     }
+    
   }
 `;
 

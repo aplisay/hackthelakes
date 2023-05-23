@@ -19,6 +19,11 @@ const Layout = ({ children, ...props }) => (
                 title
                 slug
               }
+              ... on ContentfulEventPage {
+                id
+                title
+                slug
+              }
             }
           }
         }
