@@ -7,15 +7,17 @@ import axios from 'axios';
 const GoogleEmbed = ({ calendar }) => {
   let [dimensions, setDimensions] = useState({width: 800, height: 600});
   useEffect(() => {
-    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    const vw = Math.min(document.documentElement.clientWidth*0.82, 1300);
     if (vw) {
-      setDimensions({width: vw*0.82, height: (vw*0.82*3)/4})
+      setDimensions({ width: `${vw}-4em`, height: `${(vw * 3) / 4}-4em` });
     }
 
   }, [calendar]);
 
   return (
-    <iframe src={`https://calendar.google.com/calendar/embed?src=${calendar}&ctz=Europe%2FLondon`} title="Google Calendar" style={{ border: 0 }} width={dimensions.width} height={dimensions.height} frameborder="0" scrolling="no"></iframe>
+    <div style={{margin: '0, auto, 0', align: 'center'}}>
+      <iframe src={`https://calendar.google.com/calendar/embed?src=${calendar}&ctz=Europe%2FLondon`} title="Google Calendar" style={{ border: 0 }} width={dimensions.width} height={dimensions.height} frameborder="0" scrolling="no"></iframe>
+    </div>
   )
 }
 
@@ -118,7 +120,7 @@ const Calendar = ({ calendar, apiKey, eventId }) => {
             <tbody>
 
               {events.map(event => (
-                <tr>
+                <tr key={event.id}>
                   <td>
                     <div class="row">
                       <div class="col-2 col-3-medium col-12-small"><h5>{
