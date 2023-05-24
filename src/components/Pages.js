@@ -36,6 +36,7 @@ const Style1 = ({
   node,
   style,
   title,
+  callToAction,
   teaser,
   direction,
   gallery,
@@ -61,7 +62,7 @@ const Style1 = ({
                   <ul className="actions">
                     <li>
                       <a href={slug} className="button">
-                        More Directions
+                        {callToAction}
                       </a>
                     </li>
                   </ul>
@@ -105,6 +106,7 @@ const StyleN = ({
   style,
   direction,
   title,
+  callToAction,
   teaser,
   img,
   gallery,
@@ -127,7 +129,7 @@ const StyleN = ({
         <ul className="actions">
           <li>
             <a href={slug} className="button">
-              More About {title}
+              {callToAction} {title}
             </a>
           </li>
         </ul>
@@ -160,6 +162,7 @@ const processNodes = (nodes) => {
     .map((node, index) => {
       let {
         title,
+        callToAction,
         teaser,
         featuredImage,
         featuredImageAlt,
@@ -185,6 +188,7 @@ const processNodes = (nodes) => {
               node,
               style,
               title: bodyTitle || title,
+              callToAction,
               teaser: bodyTeaser || teaser,
               featuredImage,
               featuredImageAlt,
@@ -204,6 +208,7 @@ const processNodes = (nodes) => {
               node,
               style,
               title,
+              callToAction,
               teaser,
               featuredImage,
               featuredImageAlt,

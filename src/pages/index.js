@@ -48,6 +48,7 @@ export const query = graphql`
         id
         slug
         title
+        callToAction
         teaser {
           raw
         }
@@ -70,6 +71,7 @@ export const query = graphql`
         id
         slug
         title
+        callToAction
         teaser {
           raw
         }
