@@ -4,8 +4,6 @@ import GoogleMapReact from "google-map-react";
 import { getImage, GatsbyImage } from "gatsby-plugin-image";
 import FixedSize from "./FixedSize";
 
-const { GOOGLE_MAPS_API_KEY } = process.env;
-
 const isClient = typeof window !== "undefined";
 const markerSize = 50;
 

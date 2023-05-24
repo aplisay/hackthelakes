@@ -9,16 +9,72 @@ const path = require("path");
 
 const DEBUG_webpack = false;
 
+
+exports.createSchemaCustomization = ({ actions: { createTypes }, schema }) => {
+  console.log('Schema', { schema });
+  const interface = schema.buildInterfaceType({
+
+  })
+  const typeDefs = [
+    `interface ContentfulPagelike implements Node {
+      id: ID!
+      title: String
+      slug: String
+    }
+    type ContentfulPage implements ContentfulReference & ContentfulEntry & ContentfulPagelike & Node @derivedTypes
+    type ContentfulEventPage implements ContentfulReference & ContentfulEntry & ContentfulPagelike & Node @derivedTypes
+    `
+  ];
+  console.log({ typeDefs });
+  createTypes(typeDefs);
+};
+
+exports.createResolvers = ({ createResolvers }) => {
+  const resolvers = {
+    Query: {
+      allContentfulPagelike: {
+        type: ["ContentfulPagelike"],
+        resolve: async (source, args, context, info) => {
+          // Whenever possible, use `limit` and `skip` on findAll calls to increase performance
+          const results = [
+            context.nodeModel.findAll({ type: "ContentfulPage", query: { limit: args.limit, skip: args.skip } }),
+            context.nodeModel.findAll({ type: "ContentfulEventPage", query: { limit: args.limit, skip: args.skip } })
+          ]
+          let entries = Array.from(await Promise.all(results)).reduce((o, e) => ([...o, ...(e.entries)]), []);
+          console.log('results', Promise.all(results));
+          return entries;
+        },
+      },
+    }
+  };
+  createResolvers(resolvers);
+}
+
+const { createFilePath } = require("gatsby-source-filesystem");
+
+exports.onCreateNode = args => {
+
+  const { actions, node: {file, sys} } = args;
+
+  //console.log('create node', {file, sys});
+  
+};
+
+
+
 exports.createPages = async ({ graphql, actions, reporter }) => {
   // Destructure the createPage function from the actions object
   const { createPage } = actions;
   const result = await graphql(`
     query {
-      allContentfulPage {
+      allContentfulPagelike {
         nodes {
           slug
           title
           id
+          internal {
+            type
+          }
         }
       }
     }
@@ -28,14 +84,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return;
   }
   // Create blog post pages.
-  result.data.allContentfulPage.nodes.forEach(({ slug, title, id }, index) => {
+  result.data.allContentfulPagelike.nodes.filter(node => node.title).forEach(({ slug, title, id, internal: { type } }, index) => {
     let slugPath = slug.replace(/^\/*/, "/");
+    let layout = (type === 'ContentfulEventPage') ? 'events-layout' : 'page-layout'; 
     createPage({
       slug,
       // You can prepend it with any prefix you want
       path: slugPath,
       // This component will wrap our MDX content
-      component: path.resolve(`src/components/page-layout.js`),
+      component: path.resolve(`src/components/${layout}.js`),
       // You can use the values in this context in
       // our page layout component
       context: { id, title, slug },

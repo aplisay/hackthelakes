@@ -26,55 +26,64 @@ class Home extends React.Component {
 
 export const query = graphql`
   query {
-    allContentfulHomepage {
-      nodes {
+  allContentfulHomepage {
+    nodes {
+      id
+      bannerImage {
         id
-        bannerImage {
-          id
-          gatsbyImageData(
-            width: 2000
-            placeholder: BLURRED
-            formats: [AUTO, WEBP, AVIF]
-          )
+        gatsbyImageData(width: 2000, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+      }
+      body {
+        raw
+      }
+      slug
+      bodyTeaser {
+        raw
+      }
+      bodyTitle
+      title
+      titleDescription
+      pages {
+        ... on ContentfulPage {
+        id
+        slug
+        title
+        teaser {
+          raw
+        }
+        featuredImage {
+          gatsbyImageData
+        }
+        gallery {
+          thumb: gatsbyImageData(width: 270, height: 270, placeholder: BLURRED)
+          full: gatsbyImageData(layout: FULL_WIDTH)
+        }
+        location {
+          lat
+          lon
         }
         body {
           raw
         }
+      }
+      ... on ContentfulEventPage {
+        id
         slug
-        bodyTeaser {
+        title
+        teaser {
           raw
         }
-        bodyTitle
-        title
-        titleDescription
-        pages {
-          id
-          slug
-          title
-          teaser {
-            raw
-          }
-          featuredImage {
-            gatsbyImageData
-          }
-          gallery {
-            thumb: gatsbyImageData(
-              width: 270
-              height: 270
-              placeholder: BLURRED
-            )
-            full: gatsbyImageData(layout: FULL_WIDTH)
-          }
-          location {
-            lat
-            lon
-          }
-          body {
-            raw
-          }
+        featuredImage {
+          gatsbyImageData
+        }
+        body {
+          raw
         }
       }
+      }
     }
+  }
+
   }
 `;
 

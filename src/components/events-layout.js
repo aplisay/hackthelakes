@@ -5,6 +5,8 @@ import Interact from "../components/Interact";
 import { graphql } from "gatsby";
 import { getImage, GatsbyImage } from "gatsby-plugin-image";
 import Gallery from "@browniebroke/gatsby-image-gallery";
+import Calendar from './GoogleCalendar';
+
 import { RichText, plainText } from "./RichText";
 import Map from "./GoogleMap";
 
@@ -13,7 +15,8 @@ const Page = props => {
 
   let {
     data: {
-      contentfulPage: { title, teaser, body, featuredImage, omitFeatureImage, gallery, location},
+      contentfulEventPage: { title, teaser, body, featuredImage, omitFeatureImage, googleCalendarApiKey,
+      googleCalendarId, gallery},
     },
   } = props;
   return (
@@ -27,28 +30,22 @@ const Page = props => {
         <div className="container">
           <header className="major">
             <h2>{title}</h2>
+            <div><RichText content={body} /></div>
           </header>
 
           <section id="content">
-              <a href="/" className="image fit">
+              <span className="image fit">
               {featuredImage && !omitFeatureImage && <GatsbyImage
                   image={getImage(featuredImage)}
                   alt={featuredImage.title || 'featuredImage'}
-                />}
-            </a>
-            {location && 
-              <>
-              <div className="row">
-                <div className="col-3 col-12-medium">
-                  <span><RichText content={teaser} /></span>
-                </div>
-                <div className="col-9 col-12-medium">
-                    <Map {...location} />
-                </div>
-              </div>
-              <div><RichText content={body} /></div>
-            </>}
-            {!location && <RichText content={body} />}
+              />}
+            </span>
+            <h2>Events</h2>
+            
+            <Calendar calendar={googleCalendarId} apiKey={googleCalendarApiKey} />
+            
+            <h2>Events Gallery</h2>
+
             {gallery && <div><Gallery images={gallery} /></div>}
           </section>
         </div>
@@ -59,20 +56,12 @@ const Page = props => {
 };
 
 export const pageQuery = graphql`
-  query BlogPostQuery($slug: String) {
-    contentfulPage(slug: { eq: $slug }) {
+  query BlogEventQuery($slug: String) {
+    contentfulEventPage(slug: { eq: $slug }) {
       id
       body {
         raw
-        references {
-        ... on ContentfulAsset {
-          contentful_id
-          __typename
-          file {
-            url
-          }
-        }
-        }
+
       }
       
       teaser {
@@ -84,20 +73,20 @@ export const pageQuery = graphql`
         gatsbyImageData
       }
       omitFeatureImage
-      location {
-        lat
-        lon
-      }
-        gallery {
-          thumb: gatsbyImageData(
-                width: 270
-                height: 270
-                placeholder: BLURRED
-                layout: FIXED
-              )
-              full: gatsbyImageData(layout: FULL_WIDTH)
-        }
+      googleCalendarApiKey
+      googleCalendarId
+      gallery {
+        thumb: gatsbyImageData(
+              width: 270
+              height: 270
+              placeholder: BLURRED
+              layout: FIXED
+         )
+        full: gatsbyImageData(layout: FULL_WIDTH)
+     }
+
     }
+    
   }
 `;
 
