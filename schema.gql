@@ -1,4 +1,3 @@
-### Type definitions saved at 2023-05-23T23:35:19.277Z ###
 
 enum RemoteFileFit {
   COVER
@@ -1030,10 +1029,22 @@ type ContentfulEventPage implements ContentfulReference & ContentfulEntry & Node
   omitFeatureImage: Boolean
   body: ContentfulEventPageBody
   slug: String
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+  main_menu: [ContentfulMainMenu] @link(by: "id", from: "main menu___NODE") @proxy(from: "main menu___NODE")
+=======
+>>>>>>> 91d28bf (merged)
   googleCalendarApiKey: String
   googleCalendarId: String
   featuredImage: ContentfulAsset @link(by: "id", from: "featuredImage___NODE")
   gallery: [ContentfulAsset] @link(by: "id", from: "gallery___NODE")
+<<<<<<< HEAD
+=======
+  main_menu: [ContentfulMainMenu] @link(by: "id", from: "main menu___NODE") @proxy(from: "main menu___NODE")
+  homepage: [ContentfulHomepage] @link(by: "id", from: "homepage___NODE")
+>>>>>>> Stashed changes
+>>>>>>> 91d28bf (merged)
   spaceId: String
   createdAt: Date @dateformat
   updatedAt: Date @dateformat

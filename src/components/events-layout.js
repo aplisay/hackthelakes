@@ -30,10 +30,10 @@ const Page = props => {
         <div className="container">
           <header className="major">
             <h2>{title}</h2>
-            <div><RichText content={body} /></div>
           </header>
 
           <section id="content">
+            <div><RichText content={body} /></div>
               <span className="image fit">
               {featuredImage && !omitFeatureImage && <GatsbyImage
                   image={getImage(featuredImage)}
