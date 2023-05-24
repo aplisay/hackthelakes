@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from "react";
 import Modal from 'react-modal';
-import { useStaticQuery, graphql } from "gatsby";
-import { getImage, GatsbyImage } from "gatsby-plugin-image";
 import axios from 'axios';
-import FixedSize from "./FixedSize";
 
 
 
-const isClient = typeof window !== "undefined";
-const markerSize = 50;
+const GoogleEmbed = ({ calendar }) => {
+  let [dimensions, setDimensions] = useState({width: 800, height: 600});
+  useEffect(() => {
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    if (vw) {
+      setDimensions({width: vw*0.82, height: (vw*0.82*3)/4})
+    }
+
+  }, [calendar]);
+
+  return (
+    <iframe src={`https://calendar.google.com/calendar/embed?src=${calendar}&ctz=Europe%2FLondon`} title="Google Calendar" style={{ border: 0 }} width={dimensions.width} height={dimensions.height} frameborder="0" scrolling="no"></iframe>
+  )
+}
+
 
 
 const ImagePopout = ({ src, children }) => {
@@ -33,6 +43,7 @@ const ImagePopout = ({ src, children }) => {
     setOpen(!isOpen);
     console.log('cliked', { src });
   };
+
   return (
     <div>
       <div onClick={handleShowDialog}>
@@ -99,9 +110,6 @@ const Calendar = ({ calendar, apiKey, eventId }) => {
     
   }
 
-
-  const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
-
   return (
     <>
       {calendar && apiKey &&
@@ -130,7 +138,7 @@ const Calendar = ({ calendar, apiKey, eventId }) => {
               <tfoot>
               <tr><td>
                 <h2>Full Calendar</h2>
-                <iframe src={`https://calendar.google.com/calendar/embed?src=${calendar}&ctz=Europe%2FLondon`} style={{ border: 0 }} width={vw*0.82} height="600" frameborder="0" scrolling="no"></iframe>
+                <GoogleEmbed calendar={calendar}/>
                 </td></tr>
             </tfoot>
 

@@ -1,4 +1,4 @@
-### Type definitions saved at 2023-05-24T08:05:57.890Z ###
+### Type definitions saved at 2023-05-24T08:46:23.713Z ###
 
 enum RemoteFileFit {
   COVER
@@ -937,8 +937,6 @@ type ContentfulPage implements ContentfulReference & ContentfulEntry & Node & Co
   slug: String
   location: ContentfulPageLocation
   featuredImage: ContentfulAsset @link(by: "id", from: "featuredImage___NODE")
-  main_menu: [ContentfulMainMenu] @link(by: "id", from: "main menu___NODE") @proxy(from: "main menu___NODE")
-  homepage: [ContentfulHomepage] @link(by: "id", from: "homepage___NODE")
   spaceId: String
   createdAt: Date @dateformat
   updatedAt: Date @dateformat
@@ -964,6 +962,22 @@ type ContentfulPageBody {
 type ContentfulPageLocation {
   lon: Float
   lat: Float
+}
+
+type ContentfulPageSys @derivedTypes {
+  type: String
+  revision: Int
+  contentType: ContentfulPageSysContentType
+}
+
+type ContentfulPageSysContentType @derivedTypes {
+  sys: ContentfulPageSysContentTypeSys
+}
+
+type ContentfulPageSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
 }
 
 type ContentfulHomepage implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
@@ -1007,22 +1021,6 @@ type ContentfulHomepageSysContentTypeSys {
   id: String
 }
 
-type ContentfulPageSys @derivedTypes {
-  type: String
-  revision: Int
-  contentType: ContentfulPageSysContentType
-}
-
-type ContentfulPageSysContentType @derivedTypes {
-  sys: ContentfulPageSysContentTypeSys
-}
-
-type ContentfulPageSysContentTypeSys {
-  type: String
-  linkType: String
-  id: String
-}
-
 type ContentfulEventPage implements ContentfulReference & ContentfulEntry & Node & ContentfulPagelike @derivedTypes @dontInfer {
   contentful_id: String!
   node_locale: String!
@@ -1036,8 +1034,6 @@ type ContentfulEventPage implements ContentfulReference & ContentfulEntry & Node
   googleCalendarId: String
   featuredImage: ContentfulAsset @link(by: "id", from: "featuredImage___NODE")
   gallery: [ContentfulAsset] @link(by: "id", from: "gallery___NODE")
-  main_menu: [ContentfulMainMenu] @link(by: "id", from: "main menu___NODE") @proxy(from: "main menu___NODE")
-  homepage: [ContentfulHomepage] @link(by: "id", from: "homepage___NODE")
   spaceId: String
   createdAt: Date @dateformat
   updatedAt: Date @dateformat
