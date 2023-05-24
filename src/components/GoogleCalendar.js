@@ -102,7 +102,7 @@ const Calendar = ({ calendar, apiKey, eventId }) => {
 
   return (
     <>
-      {isClient && calendar && apiKey &&
+      {calendar && apiKey &&
         <div class="table-wrapper">
           <table>
             <tbody>
