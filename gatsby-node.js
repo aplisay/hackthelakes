@@ -84,7 +84,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return;
   }
   // Create blog post pages.
-  result.data.allContentfulPagelike.nodes.forEach(({ slug, title, id, internal: { type } }, index) => {
+  result.data.allContentfulPagelike.nodes.filter(node => node.title).forEach(({ slug, title, id, internal: { type } }, index) => {
     let slugPath = slug.replace(/^\/*/, "/");
     let layout = (type === 'ContentfulEventPage') ? 'events-layout' : 'page-layout'; 
     createPage({
