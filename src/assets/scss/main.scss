@@ -151,11 +151,13 @@
 	a {
 		@include vendor('transition', ('border-color #{_duration(transition)} ease-in-out', 'color #{_duration(transition)} ease-in-out'));
 		border-bottom: dotted 1px;
-		color: _palette(accent1);
+		color: _palette(accent5);
+    font-weight: 400;
 		text-decoration: none;
 
 		&:hover {
-      color: _palette(accent1) !important;
+      color: _palette(accent5) !important;
+      font-weight: 400;
 			border-bottom-color: transparent;
 		}
 
