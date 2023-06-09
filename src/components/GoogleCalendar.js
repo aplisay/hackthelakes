@@ -96,7 +96,7 @@ const Calendar = ({ calendar, apiKey, eventId }) => {
   });
   useEffect(() => {
     calendar && apiKey && getCalendarEvents(calendar, apiKey).then(c => {
-      let cEvents = (c.items.length && c.items.filter(i => i.summary)) || [];
+      let cEvents = (c.items.length && c.items.filter(i => (i.summary && i.visibility !== 'private'))) || [];
       console.log({ items: c.items, cEvents });
       setEvents(cEvents);
     });
