@@ -1,4 +1,4 @@
-### Type definitions saved at 2023-05-24T08:46:23.713Z ###
+### Type definitions saved at 2023-06-09T11:10:19.254Z ###
 
 enum RemoteFileFit {
   COVER
@@ -935,13 +935,13 @@ type ContentfulPage implements ContentfulReference & ContentfulEntry & Node & Co
   omitFeatureImage: Boolean
   body: ContentfulPageBody
   slug: String
-  location: ContentfulPageLocation
   featuredImage: ContentfulAsset @link(by: "id", from: "featuredImage___NODE")
   spaceId: String
   createdAt: Date @dateformat
   updatedAt: Date @dateformat
   sys: ContentfulPageSys
   gallery: [ContentfulAsset] @link(by: "id", from: "gallery___NODE")
+  location: ContentfulPageLocation
 }
 
 interface ContentfulPagelike implements Node {
@@ -959,11 +959,6 @@ type ContentfulPageBody {
   references: [ContentfulAsset] @link(by: "id", from: "references___NODE")
 }
 
-type ContentfulPageLocation {
-  lon: Float
-  lat: Float
-}
-
 type ContentfulPageSys @derivedTypes {
   type: String
   revision: Int
@@ -978,6 +973,11 @@ type ContentfulPageSysContentTypeSys {
   type: String
   linkType: String
   id: String
+}
+
+type ContentfulPageLocation {
+  lon: Float
+  lat: Float
 }
 
 type ContentfulHomepage implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {

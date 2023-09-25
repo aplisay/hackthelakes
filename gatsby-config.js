@@ -83,6 +83,7 @@ module.exports = {
         update: process.env.NODE_ENV === 'development' && !process.env.GATSBY_NO_UPDATE_SCHEMA_SNAPSHOT,
       },
     },
+    'gatsby-plugin-netlify'
     
 
   ],
