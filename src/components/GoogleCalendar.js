@@ -122,7 +122,8 @@ const Calendar = ({ calendar, apiKey, eventId }) => {
               {events.map(event => (
                 <tr key={event.id}>
                   <td>
-                    <div class="row">
+                    {event.id && event.start?.dateTime && event.end?.dateTime && 
+                      <div class="row">
                       <div class="col-2 col-3-medium col-12-small"><h5>{
                         <FmtDates from={new Date(event.start.dateTime)} to={new Date(event.end.dateTime)}/>
                       }</h5></div>
@@ -132,7 +133,9 @@ const Calendar = ({ calendar, apiKey, eventId }) => {
                         </ImagePopout>
                       </div>
                       <div class="col-7 col-12-medium" dangerouslySetInnerHTML={{ __html: event.description }}></div>
-                    </div>
+                  </div>
+                  }
+
                   </td>
                 </tr>
               ))}
